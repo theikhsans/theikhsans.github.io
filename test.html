@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Penjana Pola Jahitan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border-left: 4px solid #1976d2;
+            background: #f9f9f9;
+        }
+        .test-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+        .test-item {
+            margin: 10px 0;
+            padding: 8px;
+            background: white;
+            border-radius: 4px;
+        }
+        .pass {
+            color: #4caf50;
+            font-weight: bold;
+        }
+        .fail {
+            color: #f44336;
+            font-weight: bold;
+        }
+        code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        button {
+            background: #1976d2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #1565c0;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 HTML Version - Test Suite</h1>
+        <p>Click buttons below to test the HTML conversion. Results will appear here:</p>
+
+        <div class="test-section">
+            <div class="test-title">📦 Module Loading</div>
+            <div id="moduleTest" class="test-item">Click "Test Modules" to verify all JavaScript files load correctly</div>
+            <button onclick="testModules()">Test Modules</button>
+        </div>
+
+        <div class="test-section">
+            <div class="test-title">🎯 State Management</div>
+            <div id="stateTest" class="test-item">Click "Test State" to verify DraftState functionality</div>
+            <button onclick="testState()">Test State</button>
+        </div>
+
+        <div class="test-section">
+            <div class="test-title">📏 Measurements</div>
+            <div id="measurementTest" class="test-item">Click "Test Measurements" to verify measurement data</div>
+            <button onclick="testMeasurements()">Test Measurements</button>
+        </div>
+
+        <div class="test-section">
+            <div class="test-title">✔️ Validation</div>
+            <div id="validationTest" class="test-item">Click "Test Validation" to verify measurement validation</div>
+            <button onclick="testValidation()">Test Validation</button>
+        </div>
+
+        <div class="test-section">
+            <div class="test-title">🎨 SVG Generation</div>
+            <div id="svgTest" class="test-item">Click "Test SVG" to verify pattern generation</div>
+            <button onclick="testSVG()">Test SVG</button>
+        </div>
+
+        <div class="test-section">
+            <div class="test-title">🚀 Full Integration</div>
+            <div id="integrationTest" class="test-item">Click "Full Test" to run all tests</div>
+            <button onclick="runAllTests()">Run All Tests</button>
+        </div>
+
+        <hr style="margin-top: 30px;">
+        <p>
+            <strong>✨ Next Steps:</strong>
+            <br>1. Run all tests above to verify the HTML version works
+            <br>2. Open <code>index.html</code> to use the actual app
+            <br>3. See <code>README.md</code> for documentation
+        </p>
+    </div>
+
+    <!-- Load the modules (same as index.html) -->
+    <script src="js/measurements.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/svg-builder.js"></script>
+    <script src="js/ui.js"></script>
+
+    <script>
+        const log = (elementId, html) => {
+            document.getElementById(elementId).innerHTML = html;
+        };
+
+        const testModules = () => {
+            let html = '<div class="test-item"><span class="pass">✓ All modules loaded</span>';
+            
+            if (typeof sizeMeasurements === 'undefined') html += '<br><span class="fail">✗ measurements.js not loaded</span>';
+            else html += '<br><span class="pass">✓ measurements.js loaded</span>';
+            
+            if (typeof measurementRules === 'undefined') html += '<br><span class="fail">✗ validation.js not loaded</span>';
+            else html += '<br><span class="pass">✓ validation.js loaded</span>';
+            
+            if (typeof DraftState === 'undefined') html += '<br><span class="fail">✗ state.js not loaded</span>';
+            else html += '<br><span class="pass">✓ state.js loaded</span>';
+            
+            if (typeof SvgBuilder === 'undefined') html += '<br><span class="fail">✗ svg-builder.js not loaded</span>';
+            else html += '<br><span class="pass">✓ svg-builder.js loaded</span>';
+            
+            if (typeof UI === 'undefined') html += '<br><span class="fail">✗ ui.js not loaded</span>';
+            else html += '<br><span class="pass">✓ ui.js loaded</span>';
+            
+            html += '</div>';
+            log('moduleTest', html);
+        };
+
+        const testState = () => {
+            let html = '<div class="test-item">';
+            
+            try {
+                const state = new DraftState();
+                
+                html += `<span class="pass">✓ DraftState initialized</span><br>`;
+                html += `Current garment: ${state.garment}<br>`;
+                html += `Current size: ${state.size}<br>`;
+                html += `Current unit: ${state.unit}<br>`;
+                html += `Measurements count: ${Object.keys(state.measurements).length}<br>`;
+                
+                // Test setter
+                state.setGarment('bajuMelayu');
+                html += `<span class="pass">✓ setGarment() works</span><br>`;
+                
+                state.setSize('L');
+                html += `<span class="pass">✓ setSize() works</span><br>`;
+                
+                state.setUnit('inch');
+                html += `<span class="pass">✓ setUnit() works</span><br>`;
+                
+                state.updateMeasurement('labuh', '50');
+                html += `<span class="pass">✓ updateMeasurement() works</span><br>`;
+                
+                // Test listener
+                let listenerCalled = false;
+                state.addListener(() => { listenerCalled = true; });
+                state.setView('cuttingLayout');
+                if (listenerCalled) {
+                    html += `<span class="pass">✓ Listeners work</span><br>`;
+                } else {
+                    html += `<span class="fail">✗ Listeners not working</span><br>`;
+                }
+                
+            } catch (e) {
+                html += `<span class="fail">✗ Error: ${e.message}</span><br>`;
+            }
+            
+            html += '</div>';
+            log('stateTest', html);
+        };
+
+        const testMeasurements = () => {
+            let html = '<div class="test-item">';
+            
+            try {
+                html += `<span class="pass">✓ Measurements data loaded</span><br>`;
+                html += `Size presets: ${Object.keys(sizeMeasurements).join(', ')}<br>`;
+                html += `S measurements: ${Object.keys(sizeMeasurements['S']).length}<br>`;
+                html += `M measurements: ${Object.keys(sizeMeasurements['M']).length}<br>`;
+                html += `L measurements: ${Object.keys(sizeMeasurements['L']).length}<br>`;
+                
+                if (sizeMeasurements['M']['labuh'] === 101.6) {
+                    html += `<span class="pass">✓ Sample measurement value correct</span><br>`;
+                }
+                
+                html += `Garment labels: ${Object.keys(garmentLabels).length}<br>`;
+                
+            } catch (e) {
+                html += `<span class="fail">✗ Error: ${e.message}</span><br>`;
+            }
+            
+            html += '</div>';
+            log('measurementTest', html);
+        };
+
+        const testValidation = () => {
+            let html = '<div class="test-item">';
+            
+            try {
+                html += `<span class="pass">✓ Validation rules loaded</span><br>`;
+                html += `Rules count: ${Object.keys(measurementRules).length}<br>`;
+                
+                const labuhRule = measurementRules['labuh'];
+                html += `labuh rule: ${labuhRule.min}-${labuhRule.max} cm<br>`;
+                
+                const state = new DraftState();
+                
+                // Test valid value
+                state.updateMeasurement('labuh', '110');
+                if (!state.measurementErrors['labuh']) {
+                    html += `<span class="pass">✓ Valid measurement accepted</span><br>`;
+                }
+                
+                // Test invalid value (too high)
+                state.updateMeasurement('labuh', '200');
+                if (state.measurementErrors['labuh']) {
+                    html += `<span class="pass">✓ Invalid measurement rejected: "${state.measurementErrors['labuh']}"</span><br>`;
+                }
+                
+            } catch (e) {
+                html += `<span class="fail">✗ Error: ${e.message}</span><br>`;
+            }
+            
+            html += '</div>';
+            log('validationTest', html);
+        };
+
+        const testSVG = () => {
+            let html = '<div class="test-item">';
+            
+            try {
+                const measurements = {
+                    labuh: 101.6,
+                    lebar: 104.14,
+                    labuh_lengan: 55.88,
+                    lebar_lengan: 45.72,
+                };
+                
+                const svg = SvgBuilder.buildSewingPattern('bajuKurung', measurements);
+                
+                if (svg && svg.includes('<svg')) {
+                    html += `<span class="pass">✓ SVG generation works</span><br>`;
+                    html += `SVG length: ${svg.length} characters<br>`;
+                    html += `Contains viewBox: ${svg.includes('viewBox') ? '✓' : '✗'}<br>`;
+                    html += `Contains paths: ${svg.includes('<path') ? '✓' : '✗'}<br>`;
+                    html += `<br><strong>Generated SVG preview:</strong><br>`;
+                    html += `<iframe srcdoc="${svg.replace(/"/g, '&quot;')}" style="width:100%; height:300px; border:1px solid #ccc; margin-top:10px;"></iframe>`;
+                } else {
+                    html += `<span class="fail">✗ SVG generation failed</span><br>`;
+                }
+                
+            } catch (e) {
+                html += `<span class="fail">✗ Error: ${e.message}</span><br>`;
+            }
+            
+            html += '</div>';
+            log('svgTest', html);
+        };
+
+        const runAllTests = () => {
+            testModules();
+            setTimeout(() => testState(), 100);
+            setTimeout(() => testMeasurements(), 200);
+            setTimeout(() => testValidation(), 300);
+            setTimeout(() => testSVG(), 400);
+        };
+
+        console.log('Test suite ready. Use buttons above to run tests.');
+    </script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+/* =============================================
+   Global Styles
+   ============================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* =============================================
+   App Container & Layout
+   ============================================= */
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #fafafa;
+}
+
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    background-color: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.app-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1976d2;
+}
+
+.unit-toggle {
+    display: flex;
+    gap: 8px;
+}
+
+.unit-btn {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.unit-btn:hover {
+    border-color: #1976d2;
+    color: #1976d2;
+}
+
+.unit-btn.active {
+    background-color: #1976d2;
+    color: #fff;
+    border-color: #1976d2;
+}
+
+.main-content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* =============================================
+   Side Panel
+   ============================================= */
+
+.side-panel {
+    width: 360px;
+    padding: 24px;
+    background-color: #fff;
+    border-right: 1px solid #e0e0e0;
+    overflow-y: auto;
+}
+
+.panel-section {
+    margin-bottom: 24px;
+}
+
+.panel-section:last-child {
+    margin-bottom: 0;
+}
+
+.section-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* =============================================
+   Garment & Size Selectors
+   ============================================= */
+
+.garment-selector,
+.size-selector,
+.view-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.garment-btn,
+.size-btn,
+.view-btn {
+    flex: 1;
+    min-width: 80px;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.garment-btn:hover,
+.size-btn:hover,
+.view-btn:hover {
+    border-color: #1976d2;
+    background-color: #f5f5f5;
+}
+
+.garment-btn.active,
+.size-btn.active,
+.view-btn.active {
+    background-color: #1976d2;
+    color: #fff;
+    border-color: #1976d2;
+}
+
+/* =============================================
+   Measurements Grid
+   ============================================= */
+
+.measurements-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.measurement-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.measurement-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.measurement-input-group {
+    display: flex;
+    gap: 4px;
+}
+
+.measurement-input {
+    flex: 1;
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 13px;
+    transition: border-color 0.2s;
+}
+
+.measurement-input:focus {
+    outline: none;
+    border-color: #1976d2;
+    box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.1);
+}
+
+.measurement-input.error {
+    border-color: #d32f2f;
+    background-color: #ffebee;
+}
+
+.measurement-unit {
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    color: #999;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.measurement-error {
+    font-size: 11px;
+    color: #d32f2f;
+    margin-top: 2px;
+}
+
+/* =============================================
+   Canvas Area
+   ============================================= */
+
+.canvas-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f5f5;
+    overflow: hidden;
+}
+
+.svg-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+    padding: 20px;
+}
+
+svg {
+    max-width: 100%;
+    max-height: 100%;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* =============================================
+   Scrollbar Styling
+   ============================================= */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #bbb;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}
+
+/* =============================================
+   Responsive
+   ============================================= */
+
+@media (max-width: 1024px) {
+    .side-panel {
+        width: 300px;
+        padding: 16px;
+    }
+
+    .section-title {
+        font-size: 12px;
+    }
+
+    .garment-btn,
+    .size-btn,
+    .view-btn {
+        font-size: 12px;
+        padding: 8px 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+    }
+
+    .side-panel {
+        width: 100%;
+        max-height: 40vh;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+        overflow-x: auto;
+    }
+
+    .panel-section {
+        margin-right: 24px;
+        margin-bottom: 16px;
+    }
+
+    .canvas-area {
+        flex: 1;
+    }
+}
