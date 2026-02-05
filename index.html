@@ -12,8 +12,8 @@
         <nav class="top-nav">
             <h1 class="app-title">Penjana Pola Jahitan</h1>
             <div class="unit-toggle">
-                <button class="unit-btn active" data-unit="cm">cm</button>
-                <button class="unit-btn" data-unit="inch">inci</button>
+                <button class="unit-btn" data-unit="cm">cm</button>
+                <button class="unit-btn active" data-unit="inci">inci</button>
             </div>
         </nav>
 
@@ -70,11 +70,16 @@
     </div>
 
     <!-- Scripts -->
-    <script src="js/state.js"></script>
     <script src="js/measurements.js"></script>
     <script src="js/validation.js"></script>
+    <script src="js/state.js"></script>
     <script src="js/svg-builder.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/app.js"></script>
+    <script>
+        const log = (elementId, html) => {
+            document.getElementById(elementId).innerHTML = html;
+        };
+    </script>
 </body>
 </html>

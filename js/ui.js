@@ -57,9 +57,9 @@ class UI {
             this.elements.unitToggle.addEventListener('click', (e) => {
                 const btn = e.target.closest && e.target.closest('.unit-btn');
                 if (btn && btn.dataset && btn.dataset.unit) {
-                    this.state.setUnit(btn.dataset.unit === 'cm' ? 'cm' : 'inch');
+                    this.state.setUnit(btn.dataset.unit === 'cm' ? 'cm' : 'inci');
                 } else {
-                    const newUnit = this.state.unit === 'cm' ? 'inch' : 'cm';
+                    const newUnit = this.state.unit === 'cm' ? 'inci' : 'cm';
                     this.state.setUnit(newUnit);
                 }
             });

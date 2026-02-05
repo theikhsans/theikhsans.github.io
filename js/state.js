@@ -8,7 +8,7 @@ class DraftState {
         this.view = 'sewingPattern';
         this.garment = 'bajuKurung';
         this.size = 'M';
-        this.unit = 'cm';
+        this.unit = 'inci';
         this.measurements = {};
         this.measurementErrors = {};
         this.canvasVersion = 0;
@@ -87,7 +87,7 @@ class DraftState {
         if (this.size !== newSize) {
             this.size = newSize;
             this._loadSizeDefaults();
-            this._convertToCurrentUnit();
+            //this._convertToCurrentUnit();
             this._bumpCanvasVersion();
         }
     }
@@ -98,7 +98,7 @@ class DraftState {
     setUnit(newUnit) {
         if (this.unit !== newUnit) {
             this.unit = newUnit;
-            this._convertToCurrentUnit();
+            // this._convertToCurrentUnit();
             this._revalidateMeasurements();
             this._bumpCanvasVersion();
         }
@@ -124,10 +124,12 @@ class DraftState {
     /**
      * Convert all measurements to current unit (display purposes)
      */
-    _convertToCurrentUnit() {
+    //_convertToCurrentUnit() {
         // Internal storage is always in cm
         // Conversion happens only on display (see getters)
-    }
+        //this.measurements['lebar_lengan'] = this.measurements['lebar']/2;
+        //this.measurements['bukaan_lengan'] = this.measurements['lebar_lengan'] - 2.54;
+    //}
 
     /**
      * Get measurement value in current unit

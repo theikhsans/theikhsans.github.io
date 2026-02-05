@@ -40,48 +40,53 @@ class SvgBuilder {
      * Baju Kurung sewing pattern
      */
     static _bajuKurungPattern(m) {
-        const x0 = 100, y0 = 100;
-        const labuh = m.labuh || 100;
-        const lebar = m.lebar || 100;
-        
-        let svg = `<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+        const x0 = 50, y0 = 25;
+
+        const x1 = x0 + m.lebar;
+        const y1 = y0 + m.labuh;
+        const x2 = x1 + m.labuh_lengan;
+        const y2 = y0 + m.bukaan_lengan;
+        const y3 = y0 + m.lebar_lengan;
+        const x3 = x1 + m.pesak_atas;
+        const x4 = x1 + m.pesak_bawah;
+        const x5 = x3 + m.lebar_kekek;
+        const y4 = y3 + m.lebar_kekek;
+        const x6 = x0 + m.lebar / 2;
+        const x7 = x6 + m.leher / 6;
+        const x8 = x6 - m.leher / 6;
+        const y5 = y0 + (m.leher / 6) + 2;
+
+        let svg = `<svg viewBox="0 0 180 150" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <style>
-                    .piece { fill: none; stroke: #000; stroke-width: 2; }
+                    .piece { fill: none; stroke: #000; stroke-width: 1; }
                     .grain { stroke: #999; stroke-width: 1; stroke-dasharray: 5,5; }
-                    .label { font-size: 12px; fill: #000; }
+                    .label { font-size: 6px; fill: #000; }
                     .fold { stroke: #f00; stroke-width: 1; stroke-dasharray: 3,3; }
                 </style>
             </defs>
-            
-            <!-- Title -->
-            <text x="400" y="30" font-size="24" font-weight="bold" text-anchor="middle">
-                Baju Kurung - Pola Jahitan
-            </text>
-            
+                       
             <!-- Body Piece -->
-            <rect class="piece" x="${x0}" y="${y0}" width="${lebar}" height="${labuh}" />
-            <line class="grain" x1="${x0 + lebar/2}" y1="${y0}" x2="${x0 + lebar/2}" y2="${y0 + labuh}" />
-            <text class="label" x="${x0 + lebar/2 + 5}" y="${y0 + 15}">Badan</text>
+            <rect class="piece" x="${x0}" y="${y0}" width="${m.lebar}" height="${m.labuh}" />
+            <text class="label" x="${x0 + m.lebar/3}" y="${y1 / 1.5}">Badan</text>
             
             <!-- Sleeve -->
-            <rect class="piece" x="${x0 + lebar + 50}" y="${y0}" 
-                  width="${45}" height="${80}" />
-            <line class="grain" x1="${x0 + lebar + 50 + 22.5}" y1="${y0}" 
-                  x2="${x0 + lebar + 50 + 22.5}" y2="${y0 + 80}" />
-            <text class="label" x="${x0 + lebar + 50 + 5}" y="${y0 + 15}">Lengan</text>
+            <polygon class="piece" points="${x1},${y0} ${x2},${y0} ${x2},${y2} ${x1},${y3}" />
+            <text class="label" x="${x1 + (x2 - x1) / 3}" y="${y0 + 10}">Lengan</text>
             
-            <!-- Fold Indicator -->
-            <line class="fold" x1="${x0}" y1="${y0 + labuh + 20}" 
-                  x2="${x0 + lebar}" y2="${y0 + labuh + 20}" />
-            <text class="label" x="${x0 - 40}" y="${y0 + labuh + 25}">Lipatan</text>
+            <!-- Pesak -->
+            <polygon class="piece" points="${x1},${y3} ${x3},${y3} ${x4},${y1} ${x1},${y1}" />
+            <text class="label" x="${x1 + 10}" y="${y1 / 1.5}">Pesak</text>
+
+            <!-- Kekek -->
+            <polygon class="piece" points="${x3},${y3} ${x5},${y3} ${x3},${y4}" transform ="rotate(-4 ${x3} ${y3})"/>
+            <text class="label" x="${x3 + 5}" y="${y3 + 10}">Kekek</text>
+
+            <!-- Leher -->
+            <path class="piece" d="M${x7},${y0} C${x7},${y0 + (y5-y0)/2} ${x6 + (x7-x6)/2},${y5} ${x6},${y5} C${x6 - (x7-x6)/2},${y5} ${x8},${y0 + (y5-y0)/2} ${x8},${y0}" />
+            <path class="piece" d="M${x8},${y0} C${x8},${y0 + 2} ${x7},${y0 + 2} ${x7},${y0} " />
+            <line class="piece" x1="${x6}" y1="${y5}" x2="${x6}" y2="${y5 + 10}" />
             
-            <!-- Info Box -->
-            <rect x="10" y="500" width="250" height="80" fill="none" stroke="#ccc" stroke-width="1" />
-            <text x="20" y="520" class="label" font-weight="bold">Ukuran:</text>
-            <text x="20" y="540" class="label">Labuh: ${labuh.toFixed(1)} cm</text>
-            <text x="20" y="560" class="label">Lebar: ${lebar.toFixed(1)} cm</text>
-            <text x="20" y="580" class="label">Skala: 1:1 (full size)</text>
         </svg>`;
         
         return svg;
@@ -108,9 +113,9 @@ class SvgBuilder {
         const x0 = 50, y0 = 50;
         const labuh = m.labuh || 100;
         const lebar = m.lebar || 100;
-        const fabricWidth = m.lebar_kain || 114;
+        //const fabricWidth = m.lebar_kain || 114;
         
-        let svg = `<svg width="900" height="700" xmlns="http://www.w3.org/2000/svg">
+        let svg = `<svg viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <style>
                     .fabric-outline { fill: none; stroke: #000; stroke-width: 2; }
@@ -128,7 +133,7 @@ class SvgBuilder {
             
             <!-- Fabric Outline -->
             <rect class="fabric-outline" x="${x0}" y="${y0}" 
-                  width="${fabricWidth}" height="${labuh * 2.2}" />
+                  width="114.3" height="${labuh * 2.2}" />
             
             <!-- Body Piece 1 -->
             <rect class="piece" x="${x0 + 10}" y="${y0 + 10}" 
@@ -156,7 +161,7 @@ class SvgBuilder {
             <text x="20" y="620" class="label" font-weight="bold" text-anchor="start">Petunjuk:</text>
             <text x="20" y="640" class="label" text-anchor="start">1. Potong semua pieces mengikuti garis tepi</text>
             <text x="20" y="660" class="label" text-anchor="start">2. Garis putus-putus menunjukkan arah serat kain</text>
-            <text x="500" y="620" class="label" text-anchor="start">Total Kain Diperlukan: ~${(fabricWidth * labuh * 2.2 / 100).toFixed(2)} meter</text>
+            <text x="500" y="620" class="label" text-anchor="start">Total Kain Diperlukan: x meter</text>
         </svg>`;
         
         return svg;
@@ -180,7 +185,7 @@ class SvgBuilder {
      * Placeholder for unimplemented patterns
      */
     static _placeholderSvg(title = 'Pattern Coming Soon') {
-        return `<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+        return `<svg viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <style>
                     .placeholder-text { font-size: 24px; fill: #999; text-anchor: middle; }
