@@ -29,6 +29,8 @@ class UI {
       "m_lebar_kekek",
       "m_pesak_atas",
       "m_pesak_bawah",
+      "poket_atas",
+      "poket_bawah",
     ];
 
     // Cache DOM elements (use fallbacks to match existing HTML structure)
