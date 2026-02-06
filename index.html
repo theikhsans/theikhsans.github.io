@@ -1,72 +1,124 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ms">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Penjana Pola Jahitan</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <div class="app-container">
-        <!-- Top Navigation -->
-        <nav class="top-nav">
-            <h1 class="app-title">Penjana Pola Jahitan</h1>
-            <div class="unit-toggle">
+      <!-- Top Navigation -->
+      <nav class="top-nav">
+        <h1 class="app-title">Penjana Pola Jahitan</h1>
+        <!-- <div class="unit-toggle">
                 <button class="unit-btn" data-unit="cm">cm</button>
                 <button class="unit-btn active" data-unit="inci">inci</button>
+            </div> -->
+        <!-- View Toggle -->
+        <section class="panel-section">
+          <div class="view-selector">
+            <button class="view-btn active" data-view="sewingPattern">
+              Pola Jahitan
+            </button>
+            <button class="view-btn" data-view="cuttingLayout">
+              Susun Atur Pola
+            </button>
+          </div>
+        </section>
+      </nav>
+
+      <!-- Main Layout -->
+      <div class="main-content">
+        <!-- Left Side Panel -->
+        <aside class="side-panel">
+          <!-- Garment Selection -->
+          <section class="panel-section">
+            <h2 class="section-title">Pola</h2>
+            <div class="garment-selector">
+              <button class="garment-btn active" data-garment="bajuKurung">
+                Baju Kurung
+              </button>
+              <button class="garment-btn" data-garment="kain">
+                Kain Susun Tepi
+              </button>
+              <button class="garment-btn" data-garment="leherKurung">
+                Leher Baju Kurung
+              </button>
+              <button class="garment-btn" data-garment="bajuMelayu">
+                Baju Melayu
+              </button>
+              <button class="garment-btn" data-garment="seluar">Seluar</button>
+              <button class="garment-btn" data-garment="leherMelayu">
+                Leher Baju Melayu
+              </button>
             </div>
-        </nav>
+          </section>
 
-        <!-- Main Layout -->
-        <div class="main-content">
-            <!-- Left Side Panel -->
-            <aside class="side-panel">
-                <!-- Garment Selection -->
-                <section class="panel-section">
-                    <h2 class="section-title">Pola</h2>
-                    <div class="garment-selector">
-                        <button class="garment-btn active" data-garment="bajuKurung">Baju Kurung</button>
-                        <button class="garment-btn" data-garment="bajuMelayu">Baju Melayu</button>
-                        <button class="garment-btn" data-garment="bajuKebaya">Baju Kebaya</button>
-                    </div>
-                </section>
+          <!-- Size Selection -->
+          <section class="panel-section">
+            <h2 class="section-title">Saiz</h2>
+            <div class="size-selector">
+              <button class="size-btn" data-size="1">1</button>
+              <button class="size-btn" data-size="2">2</button>
+              <button class="size-btn" data-size="4">4</button>
+              <button class="size-btn" data-size="6">6</button>
+              <button class="size-btn" data-size="8">8</button>
+              <button class="size-btn" data-size="10">10</button>
+              <button class="size-btn" data-size="XS">XS</button>
+              <button class="size-btn" data-size="S">S</button>
+              <button class="size-btn active" data-size="M">M</button>
+              <button class="size-btn" data-size="L">L</button>
+              <button class="size-btn" data-size="XL">XL</button>
+              <button class="size-btn" data-size="XXL">XXL</button>
+            </div>
+          </section>
 
-                <!-- Size Selection -->
-                <section class="panel-section">
-                    <h2 class="section-title">Saiz</h2>
-                    <div class="size-selector">
-                        <button class="size-btn" data-size="S">S</button>
-                        <button class="size-btn active" data-size="M">M</button>
-                        <button class="size-btn" data-size="L">L</button>
-                    </div>
-                </section>
+          <!-- Measurements -->
+          <section class="panel-section">
+            <h2 class="section-title">Ukuran</h2>
+            <div
+              class="unit-toggle"
+              style="
+                padding-bottom: 25px;
+                display: flex;
+                flex-direction: row-reverse;
+              "
+            >
+              <button class="unit-btn active" data-unit="inci">inci</button>
+              <button class="unit-btn" data-unit="cm">cm</button>
+            </div>
+            <div class="measurements-grid" id="measurementContainer">
+              <!-- Populated by JavaScript -->
+            </div>
+            <div
+              id="errorMessage"
+              class="error-message"
+              style="display: none"
+            ></div>
+          </section>
 
-                <!-- Measurements -->
-                <section class="panel-section">
-                    <h2 class="section-title">Ukuran</h2>
-                    <div class="measurements-grid" id="measurementContainer">
-                        <!-- Populated by JavaScript -->
-                    </div>
-                    <div id="errorMessage" class="error-message" style="display:none"></div>
-                </section>
+          <!-- View Toggle -->
+          <!-- <section class="panel-section">
+            <h2 class="section-title">Paparan</h2>
+            <div class="view-selector">
+              <button class="view-btn active" data-view="sewingPattern">
+                Pola Jahitan
+              </button>
+              <button class="view-btn" data-view="cuttingLayout">
+                Susun Atur Pola
+              </button>
+            </div>
+          </section> -->
+        </aside>
 
-                <!-- View Toggle -->
-                <section class="panel-section">
-                    <h2 class="section-title">Paparan</h2>
-                    <div class="view-selector">
-                        <button class="view-btn active" data-view="sewingPattern">Pola Jahitan</button>
-                        <button class="view-btn" data-view="cuttingLayout">Susun Potong</button>
-                    </div>
-                </section>
-            </aside>
-
-            <!-- Canvas Area -->
-            <main class="canvas-area">
-                <div class="svg-container" id="svgContainer">
-                    <!-- SVG rendered here -->
-                </div>
-            </main>
-        </div>
+        <!-- Canvas Area -->
+        <main class="canvas-area">
+          <div class="svg-container" id="svgContainer">
+            <!-- SVG rendered here -->
+          </div>
+        </main>
+      </div>
     </div>
 
     <!-- Scripts -->
@@ -76,10 +128,5 @@
     <script src="js/svg-builder.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/app.js"></script>
-    <script>
-        const log = (elementId, html) => {
-            document.getElementById(elementId).innerHTML = html;
-        };
-    </script>
-</body>
+  </body>
 </html>

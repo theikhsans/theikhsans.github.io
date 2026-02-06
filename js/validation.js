@@ -3,24 +3,36 @@
  */
 
 class MeasurementRule {
-    constructor(min, max, label) {
-        this.min = min;
-        this.max = max;
-        this.label = label;
-    }
+  constructor(min, max, label) {
+    this.min = min;
+    this.max = max;
+    this.label = label;
+  }
 }
 
 const measurementRules = {
-    'labuh': new MeasurementRule(1, 999, 'Labuh Baju'),
-    'lebar': new MeasurementRule(1, 9999, 'Lebar Bahu'),
-    'pinggul': new MeasurementRule(1, 999, 'Keliling Pinggul'),
-    'labuh_lengan': new MeasurementRule(1, 999, 'Labuh Lengan'),
-    'lebar_lengan': new MeasurementRule(1, 999, 'Lebar Lengan'),
-    'bukaan_lengan': new MeasurementRule(1, 9999, 'Bukaan Lengan'),
-    'lebar_kekek': new MeasurementRule(1, 999, 'Kekek'),
-    'leher': new MeasurementRule(1, 999, 'Keliling Leher'),
-    'pinggang': new MeasurementRule(1, 999, 'Keliling Pinggang'),
-    'pesak_atas': new MeasurementRule(1, 999, 'Pesak Atas'),
-    'pesak_bawah': new MeasurementRule(1, 999, 'Pesak Bawah'),
-    'labuh_kain': new MeasurementRule(50, 999, 'Labuh Kain'),
+  lebar: new MeasurementRule(1, 9999, "Lebar Bahu (A-B dan C-D)"),
+  labuh: new MeasurementRule(1, 999, "Labuh Baju (A-D dan B-C)"),
+  labuh_lengan: new MeasurementRule(1, 999, "Labuh Lengan (B-E)"),
+  lebar_lengan: new MeasurementRule(1, 999, "Lebar Lengan (B-G)"),
+  bukaan_lengan: new MeasurementRule(1, 9999, "Bukaan Lengan (E-F)"),
+  lebar_kekek: new MeasurementRule(1, 999, "Kekek (H-J dan H-K)"),
+  leher: new MeasurementRule(1, 999, "Keliling Leher"),
+  pesak_atas: new MeasurementRule(1, 999, "Pesak Atas ( G-H )"),
+  pesak_bawah: new MeasurementRule(1, 999, "Pesak Bawah ( C-I )"),
+  labuh_kain: new MeasurementRule(50, 999, "Labuh Kain"),
+  pinggul: new MeasurementRule(1, 999, "Keliling Pinggul"),
+  pinggang: new MeasurementRule(1, 999, "Keliling Pinggang"),
+  m_lebar: new MeasurementRule(1, 9999, "Lebar Bahu"),
+  m_labuh: new MeasurementRule(1, 999, "Labuh Baju"),
+  m_labuh_lengan: new MeasurementRule(1, 999, "Labuh Lengan"),
+  m_lebar_lengan: new MeasurementRule(1, 999, "Lebar Lengan"),
+  m_bukaan_lengan: new MeasurementRule(1, 9999, "Bukaan Lengan"),
+  m_lebar_kekek: new MeasurementRule(1, 999, "Kekek"),
+  m_pesak_atas: new MeasurementRule(1, 999, "Pesak Atas"),
+  m_pesak_bawah: new MeasurementRule(1, 999, "Pesak Bawah"),
+  labuh_seluar: new MeasurementRule(50, 999, "Labuh Seluar"),
+  m_pinggul: new MeasurementRule(1, 999, "Keliling Pinggul"),
+  cawat: new MeasurementRule(1, 999, "Cawat"),
+  bukaan_kaki: new MeasurementRule(1, 999, "Bukaan Kaki"),
 };

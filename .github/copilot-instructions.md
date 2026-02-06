@@ -1,51 +1,93 @@
 # Copilot Instructions — Pattern Generator (HTML)
 
-Purpose: give AI coding agents the minimal, high-value context to be productive quickly.
+**Purpose**: Minimal, high-value context for AI agents to become immediately productive.
 
-- **Big picture**: Single-page, vanilla JS app that generates sewing patterns as SVGs. UI (DOM) ↔ app state (`DraftState`) ↔ `SvgBuilder` which returns SVG strings injected into the canvas.
+## Big Picture
 
-- **How to run / test**: No build system. Open [index.html](index.html) to run the app and [test.html](test.html) to run the test suite in a browser. No `npm` or bundler used.
+Single-page vanilla JS app that generates sewing patterns as SVGs. Data flows: HTML ↔ UI class ↔ DraftState (observer pattern) ↔ SvgBuilder. No build system, no dependencies—just vanilla JS modules.
 
-- **Key files**:
-  - [index.html](index.html) — entry HTML and layout
-  - [js/app.js](js/app.js) — DOMContentLoaded and wiring
-  - [js/state.js](js/state.js) — `DraftState` single source of truth (observer pattern)
-  - [js/ui.js](js/ui.js) — DOM rendering, event handlers, injects SVG
-  - [js/svg-builder.js](js/svg-builder.js) — pattern and layout generation (returns SVG strings)
-  - [js/validation.js](js/validation.js) — `MeasurementRule` objects (min/max in cm)
-  - [js/measurements.js](js/measurements.js) — size presets (S/M/L) and labels
+## Running & Testing
 
-- **State & Dataflow essentials (copyable patterns)**:
-  - All measurements are stored internally in **centimeters** in `DraftState._measurements`.
-  - UI converts user input → cm before calling `state.updateMeasurement()`.
-  - Validation rules in `js/validation.js` are defined in cm and must be applied before storage.
-  - When state changes, `DraftState._bumpCanvasVersion()` increments and listeners re-render the UI and canvas.
-  - `UI._renderCanvas()` calls `SvgBuilder.buildSewingPattern()` or `buildCuttingLayout()` and sets `svgContainer.innerHTML` with the returned SVG string.
+- **App**: Open `index.html` directly in browser (no build step).
+- **Tests**: Open `test.html` to run in-browser test suite that validates state, validation, and SVG generation logic.
+- **Debugging**: `appState`, `UI`, `SvgBuilder` are global objects; open DevTools (F12) to inspect.
 
-- **Editing patterns**:
-  - Implement new garment views inside `js/svg-builder.js`. Follow existing switch/case patterns and return an SVG string.
-  - Note: SvgBuilder uses hardcoded pixel origins (e.g., 100,100). Check scaling and origin constants when adjusting layout.
+## Key Files
 
-- **Adding measurements** (concrete steps)
-  1. Add a `MeasurementRule` in `js/validation.js` (min/max in cm).
-  2. Add default values to `js/measurements.js` for S/M/L.
-  3. UI auto-renders the field; ensure label keys match across files.
+- [index.html](index.html) — Semantic HTML structure with layout sections (nav, side panel, canvas)
+- [js/app.js](js/app.js) — DOMContentLoaded handler; initializes UI instance and global `appState`
+- [js/state.js](js/state.js) — `DraftState` class (observer pattern); single source of truth
+- [js/ui.js](js/ui.js) — `UI` class; renders DOM, handles events, calls SvgBuilder, injects SVG strings
+- [js/svg-builder.js](js/svg-builder.js) — `SvgBuilder` static class; generates SVG pattern & layout strings
+- [js/validation.js](js/validation.js) — `MeasurementRule` objects with min/max bounds in cm
+- [js/measurements.js](js/measurements.js) — Size presets (S/M/L) and UI label mappings
 
-- **Debugging tips**:
-  - Open DevTools (F12). `appState` and class constructors (`DraftState`, `UI`, `SvgBuilder`) are globally inspectable.
-  - Use `console.log()` in `js/state.js` setters or `ui.js` render paths to trace updates.
-  - For canvas issues, verify `canvasVersion` increments and that `svgContainer.innerHTML` is being updated.
+## Critical State & Dataflow
 
-- **Project conventions & gotchas**:
-  - Vanilla JS modular files (no imports/exports). Edits are live after refresh.
-  - Language: UI strings are in Bahasa Melayu — keep labels consistent.
-  - No package.json or build; do not add build-only code without explaining how to run it in this repo.
-  - Validation and storage are always in cm. Never change the canonical storage unit.
+**Canonical measurement unit: centimeters** (stored in `DraftState.measurements`).
 
-- **Tests**: Use [test.html](test.html) in-browser. Tests verify module-level logic (state, validation, svg outputs).
+1. User enters value in UI (input field) at current unit (cm or inci).
+2. `UI._renderMeasurementFields()` calls `state.updateMeasurement(key, value)`.
+3. `updateMeasurement()` converts to cm if needed: `cmValue = this.unit === 'cm' ? numValue : this._inchToCm(numValue)`.
+4. Value validated against `MeasurementRule` min/max; errors stored in `measurementErrors`.
+5. `_bumpCanvasVersion()` increments counter and notifies all listeners.
+6. `UI.render()` checks version change; if changed, calls `SvgBuilder.buildSewingPattern(garmentType, measurements)` (or `buildCuttingLayout`) with cm measurements.
+7. SVG string injected into `svgContainer.innerHTML`.
 
-- **When to ask the human**:
-  - If a change requires adding a new dependency or build step (ask before introducing npm/tooling).
-  - If you need clarification on intended garment geometry (Baju Melayu/Kebaya patterns are placeholders).
+**Key detail**: `UI.getMeasurement(key)` returns display value (converted to current unit); `state.getMeasurementsInCm()` returns cm dict for SVG builder.
 
-If anything here is unclear or you want more detail about a specific file or flow, tell me which file or behavior and I'll expand the instructions.
+## Implementing New Patterns
+
+1. Add method `_garmentNamePattern(m)` and `_garmentNameCuttingLayout(m)` in `SvgBuilder`.
+2. Add cases to switch statements in `buildSewingPattern()` and `buildCuttingLayout()`.
+3. Use hardcoded pixel origins (e.g., `const x0 = 50, y0 = 25`) for positioning; parameter `m` contains cm measurements.
+4. Return SVG string with embedded `<style>` for `.piece`, `.grain`, `.label`, `.fold` classes.
+
+Example: `_bajuKurungPattern(m)` reads `m.lebar`, `m.labuh` (cm) and outputs SVG with piece coordinates calculated from these values.
+
+## Adding Measurements
+
+1. Define `MeasurementRule` in [js/validation.js](js/validation.js) with min/max in cm.
+2. Add S/M/L default values to `sizeMeasurements` in [js/measurements.js](js/measurements.js) (cm values).
+3. UI auto-renders the field; **key names must match across files**.
+4. Validation runs automatically in `updateMeasurement()`; errors appear in UI via `_renderErrors()`.
+
+Example: Adding `tangan_lebar` measurement:
+
+- validation.js: `'tangan_lebar': new MeasurementRule(5, 20, 'Lebar Tangan')`
+- measurements.js: add `'tangan_lebar': 18.5` to each size in `sizeMeasurements`
+
+## HTML/DOM Conventions
+
+- Uses `data-*` attributes for state (e.g., `<button data-garment="bajuKurung">`).
+- Flexible element selectors: fallback to querySelector if id not found (e.g., `document.getElementById('sewingPatternBtn') || document.querySelector('.view-btn[data-view="sewingPattern"]')`).
+- Button groups for garment/size; unit toggle in header; measurements grid in side panel.
+
+## Language & Labels
+
+UI strings are in **Bahasa Melayu**. Label objects in measurements.js map keys to display text:
+
+- `garmentLabels`: garment type keys → display names
+- `viewLabels`: view mode keys → display names
+  Keep label keys consistent across files.
+
+## Debugging Patterns
+
+- **State changes not reflecting**: Check `canvasVersion` increment; ensure `render()` listener is attached.
+- **Measurements not validating**: Verify rule exists in validation.js and internal storage unit is cm.
+- **Canvas not updating**: Check `svgContainer.innerHTML` assignment; verify SVG string is being generated.
+- **Unit conversion issues**: Confirm `_cmToInch()` and `_inchToCm()` are used correctly in getters/setters.
+
+## Project Constraints
+
+- **No build system**: Vanilla JS modules loaded via script tags; edits live after refresh.
+- **No npm/bundler**: Do not add dependencies or build-only code without explaining how to run it.
+- **Global scope**: `DraftState`, `UI`, `SvgBuilder` classes and `appState` instance are global.
+- **Canonical unit**: Measurements always stored in cm; never change storage unit.
+- **Incomplete garments**: Baju Melayu and Baju Kebaya are placeholders; only Baju Kurung is fully implemented.
+
+## When to Escalate
+
+- Adding new dependency or build tooling → ask first.
+- Clarification on garment geometry → ask (patterns are domain knowledge).
+- Breaking DOM assumptions (e.g., moving elements, changing structure) → verify impact on selector fallbacks.
