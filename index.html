@@ -10,11 +10,7 @@
     <div class="app-container">
       <!-- Top Navigation -->
       <nav class="top-nav">
-        <h1 class="app-title">Penjana Pola Jahitan</h1>
-        <!-- <div class="unit-toggle">
-                <button class="unit-btn" data-unit="cm">cm</button>
-                <button class="unit-btn active" data-unit="inci">inci</button>
-            </div> -->
+        <h1 class="app-title">Pemapar Pola Jahitan</h1>
         <!-- View Toggle -->
         <section class="panel-section">
           <div class="view-selector">
@@ -36,22 +32,14 @@
           <section class="panel-section">
             <h2 class="section-title">Pola</h2>
             <div class="garment-selector">
-              <button class="garment-btn active" data-garment="bajuKurung">
-                Baju Kurung
-              </button>
-              <button class="garment-btn" data-garment="kain">
-                Kain Susun Tepi
-              </button>
-              <button class="garment-btn" data-garment="leherKurung">
-                Leher Baju Kurung
-              </button>
-              <button class="garment-btn" data-garment="bajuMelayu">
-                Baju Melayu
-              </button>
-              <button class="garment-btn" data-garment="seluar">Seluar</button>
-              <button class="garment-btn" data-garment="leherMelayu">
-                Leher Baju Melayu
-              </button>
+              <select id="garmentSelect" class="garment-select">
+                <option value="bajuKurung">Baju Kurung</option>
+                <option value="kain">Kain Susun Tepi</option>
+                <option value="leherKurung">Leher Baju Kurung</option>
+                <option value="bajuMelayu">Baju Melayu</option>
+                <option value="seluar">Seluar</option>
+                <option value="leherMelayu">Leher Cekak Musang</option>
+              </select>
             </div>
           </section>
 
@@ -59,23 +47,32 @@
           <section class="panel-section">
             <h2 class="section-title">Saiz</h2>
             <div class="size-selector">
-              <button class="size-btn" data-size="1">1</button>
-              <button class="size-btn" data-size="2">2</button>
-              <button class="size-btn" data-size="4">4</button>
-              <button class="size-btn" data-size="6">6</button>
-              <button class="size-btn" data-size="8">8</button>
-              <button class="size-btn" data-size="10">10</button>
-              <button class="size-btn" data-size="XS">XS</button>
-              <button class="size-btn" data-size="S">S</button>
-              <button class="size-btn active" data-size="M">M</button>
-              <button class="size-btn" data-size="L">L</button>
-              <button class="size-btn" data-size="XL">XL</button>
-              <button class="size-btn" data-size="XXL">XXL</button>
+              <select id="sizeSelect" class="size-select">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="4">4</option>
+                <option value="6">6</option>
+                <option value="8">8</option>
+                <option value="10">10</option>
+                <option value="XS">XS</option>
+                <option value="S">S</option>
+                <option value="M" selected>M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
+              </select>
             </div>
           </section>
 
           <!-- Measurements -->
           <section class="panel-section">
+            <div class="width-toggle" style="display: none; padding-top: 25px">
+              <h2 class="section-title">Bidang Kain</h2>
+              <div style="gap: 8px; display: flex; flex-direction: row-reverse">
+                <button class="width-btn" data-width="60">60</button>
+                <button class="width-btn active" data-width="45">45</button>
+              </div>
+            </div>
             <h2 class="section-title">Ukuran</h2>
             <div
               class="unit-toggle"
@@ -97,19 +94,6 @@
               style="display: none"
             ></div>
           </section>
-
-          <!-- View Toggle -->
-          <!-- <section class="panel-section">
-            <h2 class="section-title">Paparan</h2>
-            <div class="view-selector">
-              <button class="view-btn active" data-view="sewingPattern">
-                Pola Jahitan
-              </button>
-              <button class="view-btn" data-view="cuttingLayout">
-                Susun Atur Pola
-              </button>
-            </div>
-          </section> -->
         </aside>
 
         <!-- Canvas Area -->

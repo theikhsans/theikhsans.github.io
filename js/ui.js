@@ -15,9 +15,19 @@ class UI {
       "lebar_lengan",
       "bukaan_lengan",
       "leher",
+      "belahan_leher",
       "lebar_kekek",
       "pesak_atas",
       "pesak_bawah",
+      "basi_sambungan",
+      "basi_lipatan",
+      "basi_leher",
+      "labuh_kain",
+      "pinggul",
+      "pinggang",
+      "kelonggaran",
+      "susun_tepi",
+      "bil_susun",
     ];
     this.bajuMelayuMeasurements = [
       "m_lebar",
@@ -26,11 +36,15 @@ class UI {
       "m_lebar_lengan",
       "m_bukaan_lengan",
       "leher",
+      "m_belahan_leher",
       "m_lebar_kekek",
       "m_pesak_atas",
       "m_pesak_bawah",
       "poket_atas",
       "poket_bawah",
+      "basi_sambungan",
+      "basi_lipatan",
+      "basi_leher",
     ];
 
     // Cache DOM elements (use fallbacks to match existing HTML structure)
@@ -46,6 +60,9 @@ class UI {
         document.getElementById("unitToggle") ||
         document.querySelector(".unit-toggle"),
       unitLabel: document.getElementById("unitLabel") || null,
+      widthToggle:
+        document.getElementById("widthToggle") ||
+        document.querySelector(".width-toggle"),
 
       // Garment & Size (either selects or button groups)
       garmentSelect: document.getElementById("garmentSelect") || null,
@@ -98,6 +115,19 @@ class UI {
         } else {
           const newUnit = this.state.unit === "cm" ? "inci" : "cm";
           this.state.setUnit(newUnit);
+        }
+      });
+    }
+
+    // Width toggle (support .width-toggle container with .width-btn children)
+    if (this.elements.widthToggle) {
+      this.elements.widthToggle.addEventListener("click", (e) => {
+        const btn = e.target.closest && e.target.closest(".width-btn");
+        if (btn && btn.dataset && btn.dataset.width) {
+          this.state.setWidth(btn.dataset.width);
+        } else {
+          const newWidth = this.state.width === "45" ? "60" : "45";
+          this.state.setWidth(newWidth);
         }
       });
     }
@@ -196,6 +226,15 @@ class UI {
         b.classList.toggle("active", b.dataset.unit === this.state.unit);
       });
     }
+
+    // Update width button active states inside width-toggle
+    if (this.elements.widthToggle) {
+      const widthBtns =
+        this.elements.widthToggle.querySelectorAll(".width-btn");
+      widthBtns.forEach((b) => {
+        b.classList.toggle("active", b.dataset.width === this.state.width);
+      });
+    }
   }
 
   /**
@@ -213,6 +252,9 @@ class UI {
 
       switch (this.state.garment) {
         case "bajuKurung":
+          if (!this.bajuKurungMeasurements.includes(key)) return;
+          break;
+        case "kain":
           if (!this.bajuKurungMeasurements.includes(key)) return;
           break;
         case "bajuMelayu":
@@ -238,7 +280,16 @@ class UI {
       input.id = `input-${key}`;
       input.type = "number";
       input.value = displayValue;
-      input.step = "0.1";
+
+      switch (key) {
+        case "bil_susun":
+          input.step = "1";
+          break;
+        default:
+          input.step = "0.1";
+          break;
+      }
+
       input.className = "measurement-input" + (hasError ? " error" : "");
 
       input.addEventListener("change", (e) => {
@@ -250,7 +301,13 @@ class UI {
       unit.textContent = this.state.unit;
 
       inputGroup.appendChild(input);
-      inputGroup.appendChild(unit);
+      switch (key) {
+        case "bil_susun":
+          break;
+        default:
+          inputGroup.appendChild(unit);
+          break;
+      }
 
       fieldDiv.appendChild(label);
       fieldDiv.appendChild(inputGroup);
@@ -289,9 +346,19 @@ class UI {
     let svg;
 
     if (this.state.view === "sewingPattern") {
-      svg = SvgBuilder.buildSewingPattern(this.state.garment, measurements);
+      svg = SvgBuilder.buildSewingPattern(
+        this.state.garment,
+        measurements,
+        this.state.width
+      );
+      this.elements.widthToggle.style.display = "none";
     } else {
-      svg = SvgBuilder.buildCuttingLayout(this.state.garment, measurements);
+      svg = SvgBuilder.buildCuttingLayout(
+        this.state.garment,
+        measurements,
+        this.state.width
+      );
+      this.elements.widthToggle.style.display = "block";
     }
 
     if (this.elements.svgContainer) {
