@@ -46,6 +46,23 @@ class UI {
       "basi_lipatan",
       "basi_leher",
     ];
+    this.bajuMelayuTelukMeasurements = [
+      "m_lebar",
+      "m_labuh",
+      "m_labuh_lengan",
+      "m_lebar_lengan",
+      "m_bukaan_lengan",
+      "leher_teluk",
+      "belahan_leher_teluk",
+      "m_lebar_kekek",
+      "m_pesak_atas",
+      "m_pesak_bawah",
+      "poket_atas",
+      "poket_bawah",
+      "basi_sambungan",
+      "basi_lipatan",
+      "basi_leher",
+    ];
 
     // Cache DOM elements (use fallbacks to match existing HTML structure)
     this.elements = {
@@ -63,12 +80,18 @@ class UI {
       widthToggle:
         document.getElementById("widthToggle") ||
         document.querySelector(".width-toggle"),
+      leherRadio:
+        document.getElementById("leherRadio") ||
+        document.querySelector(".leher-radio"),
 
       // Garment & Size (either selects or button groups)
       garmentSelect: document.getElementById("garmentSelect") || null,
       sizeSelect: document.getElementById("sizeSelect") || null,
       garmentButtons: document.querySelectorAll(".garment-btn"),
       sizeButtons: document.querySelectorAll(".size-btn"),
+
+      //Leher Type radio buttons
+      leherButtons: document.getElementsByName("jenis_leher") || null,
 
       // Measurements (support both singular/plural id)
       measurementContainer:
@@ -148,6 +171,15 @@ class UI {
         btn.addEventListener("click", (e) => {
           const s = btn.dataset.size;
           if (s) this.state.setSize(s);
+        });
+      });
+    }
+
+    // Leher Radio (radio group)
+    if (this.elements.leherButtons && this.elements.leherButtons.length) {
+      this.elements.leherButtons.forEach((rad) => {
+        rad.addEventListener("click", (e) => {
+          this.state.setLeher(rad.value);
         });
       });
     }
@@ -257,9 +289,33 @@ class UI {
         case "kain":
           if (!this.bajuKurungMeasurements.includes(key)) return;
           break;
-        case "bajuMelayu":
-          if (!this.bajuMelayuMeasurements.includes(key)) return;
+        case "leherKurung":
+          if (!this.bajuKurungMeasurements.includes(key)) return;
           break;
+        case "bajuMelayu":
+          if (this.state.leher === "teluk") {
+            if (!this.bajuMelayuTelukMeasurements.includes(key)) return;
+            break;
+          } else {
+            if (!this.bajuMelayuMeasurements.includes(key)) return;
+            break;
+          }
+        case "seluar":
+          if (this.state.leher === "teluk") {
+            if (!this.bajuMelayuTelukMeasurements.includes(key)) return;
+            break;
+          } else {
+            if (!this.bajuMelayuMeasurements.includes(key)) return;
+            break;
+          }
+        case "leherMelayu":
+          if (this.state.leher === "teluk") {
+            if (!this.bajuMelayuTelukMeasurements.includes(key)) return;
+            break;
+          } else {
+            if (!this.bajuMelayuMeasurements.includes(key)) return;
+            break;
+          }
       }
 
       const displayValue = this.state.getMeasurement(key);
@@ -349,16 +405,38 @@ class UI {
       svg = SvgBuilder.buildSewingPattern(
         this.state.garment,
         measurements,
-        this.state.width
+        this.state.leher
       );
       this.elements.widthToggle.style.display = "none";
+
+      if (this.state.garment === "leherMelayu") {
+        this.elements.leherRadio.style.display = "block";
+      } else {
+        this.elements.leherRadio.style.display = "none";
+      }
     } else {
       svg = SvgBuilder.buildCuttingLayout(
         this.state.garment,
         measurements,
         this.state.width
       );
-      this.elements.widthToggle.style.display = "block";
+
+      if (this.state.garment === "leherKurung") {
+        this.elements.widthToggle.style.display = "none";
+        this.elements.leherRadio.style.display = "none";
+      } else if (this.state.garment === "leherMelayu") {
+        this.elements.widthToggle.style.display = "none";
+        this.elements.leherRadio.style.display = "block";
+      } else if (
+        this.state.garment === "bajuMelayu" ||
+        this.state.garment === "seluar"
+      ) {
+        this.elements.widthToggle.style.display = "block";
+        this.elements.leherRadio.style.display = "block";
+      } else {
+        this.elements.widthToggle.style.display = "block";
+        this.elements.leherRadio.style.display = "none";
+      }
     }
 
     if (this.elements.svgContainer) {

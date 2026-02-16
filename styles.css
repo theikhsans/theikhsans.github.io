@@ -70,6 +70,12 @@ body {
   border-color: #1976d2;
 }
 
+.leher-radio {
+  display: flex;
+  gap: 8px;
+  padding-bottom: 25px;
+}
+
 .width-toggle {
   display: flex;
   gap: 8px;

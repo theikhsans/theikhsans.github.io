@@ -20,6 +20,8 @@ const measurementRules = {
   leher: new MeasurementRule(1, 76.2, "Keliling Leher"),
   belahan_leher: new MeasurementRule(1, 30.48, "Belahan Leher"),
   m_belahan_leher: new MeasurementRule(1, 30.48, "Belahan Leher"),
+  leher_teluk: new MeasurementRule(1, 76.2, "Keliling Leher"),
+  belahan_leher_teluk: new MeasurementRule(1, 30.48, "Belahan Leher"),
   pesak_atas: new MeasurementRule(1, 30.48, "Pesak Atas ( G-H )"),
   pesak_bawah: new MeasurementRule(1, 30.48, "Pesak Bawah ( C-I )"),
   labuh_kain: new MeasurementRule(1, 114.3, "Labuh Kain"),

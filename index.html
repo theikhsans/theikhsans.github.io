@@ -38,7 +38,7 @@
                 <option value="leherKurung">Leher Baju Kurung</option>
                 <option value="bajuMelayu">Baju Melayu</option>
                 <option value="seluar">Seluar</option>
-                <option value="leherMelayu">Leher Cekak Musang</option>
+                <option value="leherMelayu">Leher Baju Melayu</option>
               </select>
             </div>
           </section>
@@ -66,12 +66,29 @@
 
           <!-- Measurements -->
           <section class="panel-section">
-            <div class="width-toggle" style="display: none; padding-top: 25px">
+            <div class="width-toggle" style="display: none">
               <h2 class="section-title">Bidang Kain</h2>
               <div style="gap: 8px; display: flex; flex-direction: row-reverse">
                 <button class="width-btn" data-width="60">60</button>
                 <button class="width-btn active" data-width="45">45</button>
               </div>
+            </div>
+            <div class="leher-radio" id="leherRadio" style="display: none">
+              <h2 class="section-title">Jenis Leher</h2>
+              <input type="radio" id="teluk" name="jenis_leher" value="teluk" />
+              <label for="teluk">Teluk Belanga</label><br />
+
+              <input
+                type="radio"
+                id="cekak"
+                name="jenis_leher"
+                value="cekak"
+                checked
+              />
+              <label for="cekak">Cekak Musang</label><br />
+
+              <input type="radio" id="tunku" name="jenis_leher" value="tunku" />
+              <label for="tunku">Tunku</label>
             </div>
             <h2 class="section-title">Ukuran</h2>
             <div

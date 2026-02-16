@@ -13,6 +13,7 @@ class DraftState {
     this.measurementErrors = {};
     this.canvasVersion = 0;
     this.width = "45"; // New state property for width
+    this.leher = "cekak";
 
     // Listeners
     this.listeners = [];
@@ -111,6 +112,16 @@ class DraftState {
   setWidth(newWidth) {
     if (this.width !== newWidth) {
       this.width = newWidth;
+      this._bumpCanvasVersion();
+    }
+  }
+
+  /**
+   * Set leher type (teluk, cekak or tunku)
+   */
+  setLeher(newLeher) {
+    if (this.leher !== newLeher) {
+      this.leher = newLeher;
       this._bumpCanvasVersion();
     }
   }
