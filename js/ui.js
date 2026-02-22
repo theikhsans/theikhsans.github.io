@@ -45,6 +45,10 @@ class UI {
       "basi_sambungan",
       "basi_lipatan",
       "basi_leher",
+      "labuh_seluar",
+      "m_pinggul",
+      "cawat",
+      "bukaan_kaki",
     ];
     this.bajuMelayuTelukMeasurements = [
       "m_lebar",
@@ -62,6 +66,10 @@ class UI {
       "basi_sambungan",
       "basi_lipatan",
       "basi_leher",
+      "labuh_seluar",
+      "m_pinggul",
+      "cawat",
+      "bukaan_kaki",
     ];
 
     // Cache DOM elements (use fallbacks to match existing HTML structure)

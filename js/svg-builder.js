@@ -39,6 +39,10 @@ class SvgBuilder {
         return this._leherKurungCuttingLayout(measurements);
       case "bajuMelayu":
         return this._bajuMelayuCuttingLayout(measurements, width);
+      case "seluar":
+        return this._bajuMelayuCuttingLayout(measurements, width);
+      case "leherMelayu":
+        return this._leherMelayuCuttingLayout(measurements);
       default:
         return this._placeholderSvg();
     }
@@ -361,11 +365,13 @@ class SvgBuilder {
     const x5 = x4 + 0.953;
     const y5 = y4 + tinggiTulangBawah;
 
-    const x6 = x5 + 5;
+    const x6 = x5 + 10;
     const x7 = x6 + lebarTulangAtas / 2;
     const x8 = x7 + lebarTulangAtas / 2;
     const y6 = y4 + (m.leher > 37 ? 22.86 : m.m_belahan_leher + 3.81);
     const y7 = y6 + 1.27;
+    const x9 = x0 + 10;
+    const y8 = y0 + 5;
 
     let tebukLeher = "";
     let kolar = "";
@@ -373,14 +379,15 @@ class SvgBuilder {
     let tetulangBawah = "";
 
     if (l === "teluk") {
-      tebukLeher += `<path class="piece" d="M${x0},${y0} C${x0 + leherTeluk / 2},${y0} ${x0 + leherTeluk},${y0 + turunLeher / 2} ${x0 + leherTeluk},${y0 + turunLeher} C${x0 + leherTeluk},${y0 + turunLeher + (leherTeluk + turunLeher) / 2} ${x0 + leherTeluk / 2},${y0 + turunLeher * 2 + leherTeluk} ${x0},${y0 + turunLeher * 2 + leherTeluk}" />
-      <path class="piece" d="M${x0},${y0 - 5.08} C${x0 + (leherTeluk + 5.08) * 0.4},${y0 - 5.08} ${x0 + leherTeluk + 5.08},${y0 - 5.08 + (turunLeher + 5.08) * 0.2} ${x0 + leherTeluk + 5.08},${y0 + turunLeher} C${x0 + leherTeluk + 5.08},${y0 + turunLeher + (leherTeluk + turunLeher + 5.08) * 0.6} ${x0 + (5.08 + leherTeluk) * 0.7},${y0 + turunLeher + (leherTeluk + turunLeher + 5.08) * 0.8} ${x0 + 5.08},${y0 + turunLeher + leherTeluk + turunLeher + 5.08}   L${x0 + 5.08},${y0 + turunLeher + leherTeluk + turunLeher + m.belahan_leher} ${x0},${y0 + turunLeher + leherTeluk + turunLeher + 5.08 + m.belahan_leher} z" />
-      <line class="grain" x1="${x0}" y1="${y0 + turunLeher}" x2="${x0 + leherTeluk + 5.08}" y2="${y0 + turunLeher}" />`;
+      tebukLeher += `<path class="piece" d="M${x9},${y8} C${x9 + leherTeluk / 2},${y8} ${x9 + leherTeluk},${y8 + turunLeher / 2} ${x9 + leherTeluk},${y8 + turunLeher} C${x9 + leherTeluk},${y8 + turunLeher + (leherTeluk + turunLeher) / 2} ${x9 + leherTeluk / 2},${y8 + turunLeher * 2 + leherTeluk} ${x9},${y8 + turunLeher * 2 + leherTeluk}" />
+      <path class="piece" d="M${x9},${y8 - 5.08} C${x9 + (leherTeluk + 5.08) * 0.4},${y8 - 5.08} ${x9 + leherTeluk + 5.08},${y8 - 5.08 + (turunLeher + 5.08) * 0.2} ${x9 + leherTeluk + 5.08},${y8 + turunLeher} C${x9 + leherTeluk + 5.08},${y8 + turunLeher + (leherTeluk + turunLeher + 5.08) * 0.6} ${x9 + (5.08 + leherTeluk) * 0.7},${y8 + turunLeher + (leherTeluk + turunLeher + 5.08) * 0.8} ${x9 + 5.08},${y8 + turunLeher + leherTeluk + turunLeher + 5.08}   L${x9 + 5.08},${y8 + turunLeher + leherTeluk + turunLeher + m.belahan_leher} ${x9},${y8 + turunLeher + leherTeluk + turunLeher + 5.08 + m.belahan_leher} z" />
+      <line class="grain" x1="${x9}" y1="${y8 + turunLeher}" x2="${x9 + leherTeluk + 5.08}" y2="${y8 + turunLeher}" />`;
     } else {
       tebukLeher += `<path class="piece" d="M${x0},${y0} L${x0 + leher / 2},${y0} C${x0 + leher * 0.75},${y0} ${x0 + leher},${y0 + (leher + 3.81) / 6} ${x0 + leher},${y0 + (leher + 3.81) / 3} C${x0 + leher},${y0 + ((leher + 3.81) / 3) * 2} ${x0 + leher / 2},${y0 + leher + 3.81} ${x0},${y0 + leher + 3.81}" />
       <rect class="piece" x="${x0}" y="${y0}" width="${leher}" height="${leher + 3.81}" />
       <line class="grain" x1="${x0}" y1="${y0 + (leher + 3.81) / 3}" x2="${x0 + leher}" y2="${y0 + (leher + 3.81) / 3}" />
       <line class="piece" x1="${x0}" y1="${y0 + ((leher + 3.81) / 3) * 2}" x2="${x0 + leher}" y2="${y0 + ((leher + 3.81) / 3) * 2}" />
+      <line class="piece" x1="${x0 + leher / 2}" y1="${y0}" x2="${x0 + leher / 2}" y2="${y0 + leher + 3.81}" />
       <line class="piece" x1="${x0}" y1="${y0 + leher + 3.81}" x2="${x0}" y2="${y0 + leher + 3.81 + m.m_belahan_leher}" />`;
 
       kolar += `<path class="piece" d="M${x1},${y0} L${x2},${y0} Q${x2 + (point3.x - x2) / 2},${y0 - (point3.y - y0) / 7} ${point3.x},${point3.y} Q${point2.x},${point2.y} ${point1.x},${point1.y} L${x3},${y1} Q${x2 + (x3 - x2) / 2},${y2 - (y1 - y2) / 7} ${x2},${y2} L${x1},${y2} z" />
@@ -1091,14 +1098,402 @@ class SvgBuilder {
    * Baju Melayu cutting layout (placeholder)
    */
   static _bajuMelayuCuttingLayout(m, w) {
-    return this._placeholderSvg("Baju Melayu - Susun Potong");
+    const x0 = 10,
+      y0 = 10;
+
+    const turunLeher = m.leher < 38.1 ? 1.27 : 1.91;
+    const leher = m.leher / 6;
+    const leherTeluk = m.leher_teluk / 6;
+    const tinggiPesak = m.m_labuh - m.m_lebar_lengan;
+
+    const cx1 = m.m_pinggul < 93.98 ? 5.08 : 8.89;
+    const cx2 = m.m_pinggul < 93.98 ? 3.81 : 5.08;
+    const cy1 = m.m_pinggul < 93.98 ? 7.62 : 8.89;
+    const cy2 = m.m_pinggul < 93.98 ? 5.08 : 6.35;
+
+    let lengan = "";
+    let seluar = "";
+    let pesak = "";
+    let kekek = "";
+    let poket = "";
+    let canvasWidth = w * 2.54 + 20;
+    let canvasHeight = 0;
+    let heightWithSeluar = 0;
+    let height = 0;
+    let highestBadanPoint = 0;
+    let highestPesakPoint = 0;
+    let highestLenganPoint = 0;
+    let highestSeluarPoint = 0;
+
+    const x1 =
+      x0 +
+      2 +
+      m.m_lebar +
+      m.basi_sambungan * 6 +
+      m.m_pesak_atas +
+      m.m_pesak_bawah;
+    const y1 = y0 + 2.54;
+    const x2 =
+      x0 +
+      w * 2.54 -
+      2 -
+      ((m.m_pinggul + 7.62) / 2 + cx1 + m.basi_sambungan * 2);
+    const x3 =
+      x0 +
+      w * 2.54 -
+      2 -
+      ((m.m_pinggul + 7.62) / 2 + cx1 + m.basi_sambungan * 2) * 2 -
+      cx2;
+    const y2 = y1 + 3.81 + m.labuh_seluar + m.basi_lipatan;
+    const x4 = x0 + w * 2.54 + 7 + cx2;
+    const x5 = x0 + 2 + m.m_lebar + m.basi_sambungan * 2;
+    const y3 = y0 + tinggiPesak + m.basi_lipatan + m.basi_sambungan;
+    const y4 = y3 + m.m_labuh_lengan + m.basi_lipatan + m.basi_sambungan;
+    const y5 = y0 + m.m_labuh * 2 + m.basi_lipatan * 2;
+    const y6 = y5 + m.m_labuh_lengan + m.basi_lipatan + m.basi_sambungan;
+    const x7 = x0 + w * 2.54 - 2 - m.lebar_lengan * 2 - m.basi_sambungan * 2;
+    const x8 = x7 - m.lebar_lengan * 2 - m.basi_sambungan * 2;
+    const x6 =
+      x0 +
+      w * 2.54 -
+      2 -
+      m.m_pesak_atas -
+      m.m_pesak_bawah -
+      m.basi_sambungan * 4;
+    const x9 = x6 - m.m_pesak_atas - m.m_pesak_bawah - m.basi_sambungan * 4;
+    const x10 =
+      x0 +
+      2 +
+      m.m_lebar +
+      m.basi_sambungan * 6 +
+      m.m_pesak_atas +
+      m.m_pesak_bawah;
+    const y7 = y2 + m.labuh_seluar + m.basi_lipatan + 6.35;
+    const y8 = y0 + m.m_labuh_lengan + m.basi_lipatan + m.basi_sambungan;
+    const x11 =
+      x0 +
+      w * 2.54 +
+      7 +
+      m.basi_sambungan * 2 +
+      (m.m_pinggul + 7.62) / 2 +
+      cx1 +
+      cx2;
+    const x12 =
+      x0 + 2 + m.m_pesak_atas + m.m_pesak_bawah + m.basi_sambungan * 4;
+
+    if (
+      w * 2.54 >
+      4 +
+        m.m_lebar +
+        m.basi_sambungan * 6 +
+        m.m_pinggul +
+        7.62 +
+        (cx1 + cx2) * 2
+    ) {
+      //layout 1
+      seluar += this._getSeluar1(m, x3, y1);
+      seluar += this._getSeluar2(
+        m,
+        x2,
+        y1,
+        y1 + m.labuh_seluar + m.basi_lipatan + 3.81 + y0
+      );
+
+      highestBadanPoint = y5 - y0;
+
+      if (
+        w * 2.54 >
+        4 +
+          m.m_lebar +
+          m.basi_sambungan * 14 +
+          m.m_pinggul +
+          7.62 +
+          (cx1 + cx2) * 2 +
+          m.m_pesak_atas * 2 +
+          m.m_pesak_bawah * 2
+      ) {
+        pesak += this._getPesakMelayu(m, x5, y0);
+        pesak += this._getPesakMelayu(m, x1, y0);
+        lengan += this._getLenganMelayu(m, x5, y3);
+        lengan += this._getLenganMelayu(m, x5, y4);
+
+        highestLenganPoint =
+          y4 + m.m_labuh_lengan + m.basi_lipatan + m.basi_sambungan - y0;
+      } else if (
+        w * 2.54 >
+        4 +
+          m.m_lebar +
+          m.basi_sambungan * 10 +
+          m.m_pinggul +
+          7.62 +
+          (cx1 + cx2) * 2 +
+          m.m_pesak_atas +
+          m.m_pesak_bawah
+      ) {
+        pesak += this._getPesakMelayu(m, x5, y0);
+        pesak += this._getPesakMelayu(m, x5, y3);
+        lengan += this._getLenganMelayu(m, x8, y2);
+        lengan += this._getLenganMelayu(m, x7, y2);
+
+        highestLenganPoint =
+          y2 + m.m_labuh_lengan + m.basi_lipatan + m.basi_sambungan - y0;
+      } else {
+        pesak += this._getPesakMelayu(m, x5, y2);
+        pesak += this._getPesakMelayu(m, x10, y2);
+        lengan += this._getLenganMelayu(m, x8, y2);
+        lengan += this._getLenganMelayu(m, x7, y2);
+
+        highestLenganPoint =
+          y2 + m.m_labuh_lengan + m.basi_lipatan + m.basi_sambungan - y0;
+
+        highestPesakPoint =
+          y2 + tinggiPesak + m.basi_lipatan + m.basi_sambungan - y0;
+      }
+
+      height = Math.max(
+        highestBadanPoint,
+        highestPesakPoint,
+        highestLenganPoint
+      );
+      canvasHeight = height;
+    } else if (
+      w * 2.54 >
+      4 +
+        m.m_lebar +
+        (m.m_pinggul + 7.62) / 2 +
+        m.basi_sambungan * 4 +
+        cx1 +
+        cx2
+    ) {
+      //layout 2
+      seluar += this._getSeluar1(m, x2, y1);
+      seluar += this._getSeluar2(
+        m,
+        x2,
+        y2,
+        y2 * 2 + m.labuh_seluar + m.basi_lipatan + 3.81
+      );
+
+      highestBadanPoint = y5 - y0;
+      highestSeluarPoint = y2 + m.labuh_seluar + m.basi_lipatan + 6.35 - y0;
+
+      if (
+        w * 2.54 >
+        4 +
+          m.m_lebar +
+          m.basi_sambungan * 12 +
+          (m.m_pinggul + 7.62) / 2 +
+          cx1 +
+          cx2 +
+          m.m_pesak_atas * 2 +
+          m.m_pesak_bawah * 2
+      ) {
+        pesak += this._getPesakMelayu(m, x5, y0);
+        pesak += this._getPesakMelayu(m, x1, y0);
+        lengan += this._getLenganMelayu(m, x5, y3);
+        lengan += this._getLenganMelayu(m, x5, y4);
+
+        highestLenganPoint =
+          y4 + m.m_labuh_lengan + m.basi_lipatan + m.basi_sambungan - y0;
+      } else if (
+        w * 2.54 >
+        4 +
+          m.m_lebar +
+          m.basi_sambungan * 8 +
+          (m.m_pinggul + 7.62) / 2 +
+          cx1 +
+          cx2 +
+          m.m_pesak_atas +
+          m.m_pesak_bawah
+      ) {
+        pesak += this._getPesakMelayu(m, x5, y0);
+        pesak += this._getPesakMelayu(m, x5, y3);
+        lengan += this._getLenganMelayu(m, x0 + 2, y5);
+        lengan += this._getLenganMelayu(m, x0 + 2, y6);
+
+        highestLenganPoint =
+          y6 + m.m_labuh_lengan + m.basi_lipatan + m.basi_sambungan - y0;
+      } else {
+        pesak += this._getPesakMelayu(m, x9, y7);
+        pesak += this._getPesakMelayu(m, x6, y7);
+        lengan += this._getLenganMelayu(m, x0 + 2, y5);
+        lengan += this._getLenganMelayu(m, x0 + 2, y6);
+
+        highestLenganPoint =
+          y6 + m.m_labuh_lengan + m.basi_lipatan + m.basi_sambungan - y0;
+
+        highestPesakPoint =
+          y7 + tinggiPesak + m.basi_lipatan + m.basi_sambungan - y0;
+      }
+
+      height = Math.max(
+        highestBadanPoint,
+        highestPesakPoint,
+        highestLenganPoint,
+        highestSeluarPoint
+      );
+      canvasHeight = height;
+    } else {
+      //layout 3
+      seluar += `<!-- Fabric Outline -->
+            <rect class="fabric-outline" x="${x0 + w * 2.54 + 5}" y="${y0}" 
+            width="${w * 2.54}" height="${
+              (m.labuh_seluar + m.basi_lipatan + 6.35) * 2
+            }" />`;
+      seluar += this._getSeluar1(m, x4, y1);
+      seluar += this._getSeluar2(
+        m,
+        x4,
+        y2,
+        y2 * 2 + m.labuh_seluar + m.basi_lipatan + 3.81
+      );
+
+      highestBadanPoint = y5 - y0;
+      highestSeluarPoint = y2 + m.labuh_seluar + m.basi_lipatan + 6.35 - y0;
+
+      if (
+        w * 2.54 >
+        4 +
+          m.m_lebar +
+          m.basi_sambungan * 10 +
+          m.m_pesak_atas * 2 +
+          m.m_pesak_bawah * 2
+      ) {
+        pesak += this._getPesakMelayu(m, x5, y0);
+        pesak += this._getPesakMelayu(m, x1, y0);
+        lengan += this._getLenganMelayu(m, x5, y3);
+        lengan += this._getLenganMelayu(m, x5, y4);
+
+        highestLenganPoint =
+          y4 + m.m_labuh_lengan + m.basi_lipatan + m.basi_sambungan - y0;
+      } else if (
+        w * 2.54 >
+        4 +
+          m.basi_sambungan * 6 +
+          (m.m_pinggul + 7.62) / 2 +
+          cx1 +
+          cx2 +
+          m.m_pesak_atas +
+          m.m_pesak_bawah
+      ) {
+        pesak += this._getPesakMelayu(m, x11, y0);
+        pesak += this._getPesakMelayu(m, x11, y3);
+        lengan += this._getLenganMelayu(m, x5, y0);
+        lengan += this._getLenganMelayu(m, x5, y8);
+      } else {
+        pesak += this._getPesakMelayu(m, x0 + 2, y5);
+        pesak += this._getPesakMelayu(m, x12, y5);
+        lengan += this._getLenganMelayu(m, x5, y0);
+        lengan += this._getLenganMelayu(m, x5, y8);
+
+        highestPesakPoint =
+          y5 + tinggiPesak + m.basi_lipatan + m.basi_sambungan - y0;
+      }
+
+      height = Math.max(
+        highestBadanPoint,
+        highestPesakPoint,
+        highestLenganPoint
+      );
+      canvasHeight = Math.max(height, highestSeluarPoint);
+      canvasWidth = w * 2.54 * 2 + 25;
+      heightWithSeluar = height + highestSeluarPoint;
+    }
+
+    let svg = `<svg viewBox="0 0 ${canvasWidth} ${canvasHeight + 20}" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <marker id="arrowhead" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse" >
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="black" />
+                </marker>
+
+                <style>
+                  .fabric-outline { fill: none; stroke: #000; stroke-width: 1.5; }
+                  .piece { fill: #f0f0f0; stroke: #000; stroke-width: 1; }
+                  .grain { stroke: #000; stroke-width: 0.5; marker-start:url(#arrowhead); marker-end:url(#arrowhead);}
+                  .mid_line { stroke: #333; stroke-width: 0.5; stroke-dasharray: 2,2; }
+                  .sew-line { fill: none; stroke: #333; stroke-width: 0.5; stroke-dasharray: 2,2;}
+                  .label { font-size: 6px; fill: #000; text-anchor: middle; }
+                  .title { font-size: 18px; font-weight: bold; }
+                  .fold { fill: none; stroke: #000; stroke-width: 0.5; }
+                </style>
+                
+            </defs>
+                        
+            <!-- Fabric Outline -->
+            <rect class="fabric-outline" x="${x0}" y="${y0}" 
+                  width="${w * 2.54}" height="${height}" />
+            
+            <!-- Body Piece -->
+            <rect class="piece" x="${x0 + 2}" y="${y0}" 
+                  width="${m.m_lebar + m.basi_sambungan * 2}" height="${m.m_labuh * 2 + m.basi_lipatan * 2}" />
+            <path class="sew-line" d="M${2 + x0 + m.m_lebar + m.basi_sambungan},${y0 + m.basi_lipatan} ${2 + x0 + m.m_lebar + m.basi_sambungan},${y0 + m.m_labuh * 2 + m.basi_lipatan} ${2 + x0 + m.basi_sambungan},${y0 + m.m_labuh * 2 + m.basi_lipatan} ${2 + x0 + m.basi_sambungan},${y0 + m.basi_lipatan} z" />
+            <line class="mid_line" x1="${2 + x0}" y1="${y0 + m.m_labuh + m.basi_lipatan}" 
+                  x2="${x0 + 2 + m.m_lebar + m.basi_sambungan}" y2="${y0 + m.m_labuh + m.basi_lipatan}"/>
+            <line class="grain" x1="${x0 + 2 + m.m_lebar / 4}" y1="${y0 + m.m_labuh / 2}" 
+                  x2="${x0 + 2 + m.m_lebar / 4}" y2="${y0 + m.m_labuh * 1.5}" />
+            
+            <text class="label" x="${x0 + 2 + m.m_lebar / 2}" y="${y0 + m.m_labuh / 2}">Badan</text>
+                        
+            <!-- Sleeve -->
+            ${lengan}
+
+            <!-- Pesak -->
+            ${pesak}
+
+            <!-- Seluar -->
+            ${seluar}
+
+            <!-- Poket -->
+            ${poket}
+
+            <!-- Kekek -->
+            ${kekek}
+
+            <text class="label" text-anchor="start" x="${x0 + 45}" y="${canvasHeight + 16}" >Panjang Kain Diperlukan: ${(heightWithSeluar == 0 ? height / 100 : heightWithSeluar / 100).toFixed(1)} meter</text>
+            
+        </svg>`;
+
+    return svg;
   }
 
   /**
-   * Baju Kebaya cutting layout (placeholder)
+   * Leher Baju Melayu cutting layout
    */
-  static _bajuKebayaCuttingLayout(m, w) {
-    return this._placeholderSvg("Baju Kebaya - Susun Potong");
+  static _leherMelayuCuttingLayout(m) {
+    const x0 = 2,
+      y0 = 2;
+
+    let leher = this._getLeher(m, 5 + x0 + 5.08 + m.leher / 6, 5 + y0);
+
+    let svg = `<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <marker id="arrowhead" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse" >
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="black" />
+                </marker>
+
+                <style>
+                  .fabric-outline { fill: none; stroke: #000; stroke-width: 0.75; }
+                  .piece { fill: #f0f0f0; stroke: #000; stroke-width: 0.5; }
+                  .grain { stroke: #000; stroke-width: 0.5; marker-start:url(#arrowhead); marker-end:url(#arrowhead);}
+                  .mid_line { stroke: #333; stroke-width: 0.25; stroke-dasharray: 1,1; }
+                  .sew-line { fill: none; stroke: #333; stroke-width: 0.25; stroke-dasharray: 1,1; }
+                  .label { font-size: 6px; fill: #000; text-anchor: middle; }
+                  .title { font-size: 18px; font-weight: bold; }
+                  .fold { fill: none; stroke: #000; stroke-width: 0.5; }
+                </style>
+
+                
+            </defs>
+
+            <!-- Leher -->
+            ${leher}
+
+            <!-- Labels -->
+
+
+        </svg>`;
+
+    return svg;
   }
 
   /**
@@ -1178,5 +1573,87 @@ class SvgBuilder {
                     <rect class="sew-line" x="${x + m.basi_sambungan}" y="${y + m.basi_sambungan}"
                     width="${5}" height="${m.pinggul + m.kelonggaran + 3}" />`;
     return pinggang;
+  }
+
+  static _getSeluar1(m, x, y) {
+    let seluar = "";
+
+    const cx1 = m.m_pinggul < 93.98 ? 5.08 : 8.89;
+    const cx2 = m.m_pinggul < 93.98 ? 3.81 : 5.08;
+    const cy1 = m.m_pinggul < 93.98 ? 7.62 : 8.89;
+    const cy2 = m.m_pinggul < 93.98 ? 5.08 : 6.35;
+
+    const x1 = x + m.basi_sambungan + (m.m_pinggul + 7.62) / 4;
+    const y1 = y + 3.81 - 2.54;
+    const y2 = y + 3.81 + m.cawat / 2;
+    const y3 = y + 3.81 + m.labuh_seluar;
+    const x2 = x1 + (m.m_pinggul + 7.62) / 4;
+    const x3 = x2 - 2.54;
+    const x4 = x2 + cx1;
+    const x5 = x1 + m.bukaan_kaki + (m.m_pinggul < 93.98 ? 0.953 : 1.27);
+    const x6 = x1 - m.bukaan_kaki + (m.m_pinggul < 93.98 ? 0.953 : 1.27);
+    const x7 = x + m.basi_sambungan - cx2;
+    const y4 = y2 - cy1;
+    const y5 = y2 - cy2;
+
+    seluar += `<path class="piece" d="M${x},${y} L${x1},${y} ${x3 + m.basi_sambungan},${y - 2.54} ${x2 + m.basi_sambungan},${y4} C${x2 + m.basi_sambungan + (cx1 + m.basi_sambungan) * 0.2},${y4 + cy1 / 2} ${x2 + m.basi_sambungan + (cx1 + m.basi_sambungan) * 0.2},${y2 - cy1 * 0.5} ${x4 + m.basi_sambungan},${y2} L${x5 + m.basi_sambungan},${y3} ${x5 + m.basi_sambungan},${y3 + m.basi_lipatan} ${x6 - m.basi_sambungan},${y3 + m.basi_lipatan} ${x6 - m.basi_sambungan},${y3} ${x7 - m.basi_sambungan},${y2} C${x7 - m.basi_sambungan + (cx2 + m.basi_sambungan) / 2},${y2 - cy2 / 2} ${x},${y5 + cy2 / 2} ${x},${y5} z" />`;
+
+    seluar += `<path class="sew-line" d="M${x + m.basi_sambungan},${y + 3.81} L${x1},${y + 3.81} ${x3},${y1} ${x2},${y4} C${x2},${y4 + cy1 / 2} ${x2 + cx1 / 2},${y2} ${x4},${y2} L${x5},${y3} ${x6},${y3} ${x7},${y2} C${x7 + cx2 / 2},${y2} ${x + m.basi_sambungan},${y5 + cy2 / 2} ${x + m.basi_sambungan},${y5} z" />`;
+
+    return seluar;
+  }
+
+  static _getSeluar2(m, x, y, ty) {
+    let seluar = "";
+
+    const cx1 = m.m_pinggul < 93.98 ? 5.08 : 8.89;
+    const cx2 = m.m_pinggul < 93.98 ? 3.81 : 5.08;
+    const cy1 = m.m_pinggul < 93.98 ? 7.62 : 8.89;
+    const cy2 = m.m_pinggul < 93.98 ? 5.08 : 6.35;
+
+    const x1 = x + m.basi_sambungan + (m.m_pinggul + 7.62) / 4;
+    const y1 = y + 3.81 - 2.54;
+    const y2 = y + 3.81 + m.cawat / 2;
+    const y3 = y + 3.81 + m.labuh_seluar;
+    const x2 = x1 + (m.m_pinggul + 7.62) / 4;
+    const x3 = x2 - 2.54;
+    const x4 = x2 + cx1;
+    const x5 = x1 + m.bukaan_kaki + (m.m_pinggul < 93.98 ? 0.953 : 1.27);
+    const x6 = x1 - m.bukaan_kaki + (m.m_pinggul < 93.98 ? 0.953 : 1.27);
+    const x7 = x + m.basi_sambungan - cx2;
+    const y4 = y2 - cy1;
+    const y5 = y2 - cy2;
+
+    seluar += `<path transform="translate(0, ${ty}) scale(1, -1)" class="piece" d="M${x},${y} L${x1},${y} ${x3 + m.basi_sambungan},${y - 2.54} ${x2 + m.basi_sambungan},${y4} C${x2 + m.basi_sambungan + (cx1 + m.basi_sambungan) * 0.2},${y4 + cy1 / 2} ${x2 + m.basi_sambungan + (cx1 + m.basi_sambungan) * 0.2},${y2 - cy1 * 0.5} ${x4 + m.basi_sambungan},${y2} L${x5 + m.basi_sambungan},${y3} ${x5 + m.basi_sambungan},${y3 + m.basi_lipatan} ${x6 - m.basi_sambungan},${y3 + m.basi_lipatan} ${x6 - m.basi_sambungan},${y3} ${x7 - m.basi_sambungan},${y2} C${x7 - m.basi_sambungan + (cx2 + m.basi_sambungan) / 2},${y2 - cy2 / 2} ${x},${y5 + cy2 / 2} ${x},${y5} z" />`;
+
+    seluar += `<path transform="translate(0, ${ty}) scale(1, -1)" class="sew-line" d="M${x + m.basi_sambungan},${y + 3.81} L${x1},${y + 3.81} ${x3},${y1} ${x2},${y4} C${x2},${y4 + cy1 / 2} ${x2 + cx1 / 2},${y2} ${x4},${y2} L${x5},${y3} ${x6},${y3} ${x7},${y2} C${x7 + cx2 / 2},${y2} ${x + m.basi_sambungan},${y5 + cy2 / 2} ${x + m.basi_sambungan},${y5} z" />`;
+    return seluar;
+  }
+
+  static _getLenganMelayu(m, x, y) {
+    let lengan = "";
+    lengan += `<polygon class="piece" points="${x},${y} ${x + m.m_lebar_lengan * 2 + m.basi_sambungan * 2},${y} ${x + m.m_lebar_lengan + m.m_bukaan_lengan + m.basi_sambungan * 2},  ${y + m.m_labuh_lengan + m.basi_lipatan + m.basi_sambungan} ${x + m.m_lebar_lengan - m.m_bukaan_lengan},${y + m.m_labuh_lengan + m.basi_lipatan + m.basi_sambungan} ${x},${y}" />
+      <polygon class="sew-line" points="${x + m.basi_sambungan},${y + m.basi_sambungan} ${x + m.basi_sambungan + m.m_lebar_lengan * 2},${y + m.basi_sambungan} ${x + m.basi_sambungan + m.m_lebar_lengan + m.m_bukaan_lengan},${y + m.m_labuh_lengan + m.basi_sambungan} ${x + m.m_lebar_lengan - m.m_bukaan_lengan + m.basi_sambungan},${y + m.m_labuh_lengan + m.basi_sambungan} ${x + m.basi_sambungan},${y + m.basi_sambungan}" />
+            <line class="mid_line" x1="${x + m.m_lebar_lengan + m.basi_sambungan}" y1="${y}" x2="${x + m.m_lebar_lengan + m.basi_sambungan}" y2="${y + m.m_labuh_lengan + m.basi_lipatan}"/>
+            <text class="label" x="${x + m.m_lebar_lengan + m.basi_sambungan}" y="${y + m.m_labuh_lengan / 2}">Lengan</text>`;
+    return lengan;
+  }
+
+  static _getPesakMelayu(m, x, y) {
+    const tinggiPesak = m.m_labuh - m.m_lebar_lengan;
+    let pesak = "";
+    pesak += `<rect class="piece" x="${x}" y="${y}"
+                    width="${m.m_pesak_atas + m.m_pesak_bawah + m.basi_sambungan * 4}" height="${tinggiPesak + m.basi_lipatan + m.basi_sambungan}" />
+              <line class="piece" x1="${x + m.basi_sambungan * 2 + m.m_pesak_atas}" y1="${y}" x2="${x + m.basi_sambungan * 2 + m.m_pesak_bawah}" y2="${y + m.basi_sambungan + tinggiPesak + m.basi_lipatan}" />
+              <path class="sew-line" d="M${x + m.basi_sambungan},${y + m.basi_sambungan} ${x + m.basi_sambungan + m.m_pesak_atas},${y + m.basi_sambungan} ${x + m.basi_sambungan + m.m_pesak_bawah},${y + m.basi_sambungan + tinggiPesak} ${x + m.basi_sambungan},${y + m.basi_sambungan + tinggiPesak} ${x + m.basi_sambungan},${y + m.basi_sambungan}" />
+              <path class="sew-line" d="M${x + m.basi_sambungan * 3 + m.m_pesak_atas},${y + m.basi_lipatan} ${x + m.basi_sambungan * 3 + m.m_pesak_atas + m.m_pesak_bawah},${y + m.basi_lipatan} ${x + m.basi_sambungan * 3 + m.m_pesak_atas + m.m_pesak_bawah},${y + m.basi_lipatan + tinggiPesak} ${x + m.basi_sambungan * 3 + m.m_pesak_bawah},${y + m.basi_lipatan + tinggiPesak} ${x + m.basi_sambungan * 3 + m.m_pesak_atas},${y + m.basi_lipatan}" />`;
+    return pesak;
+  }
+
+  static _getKekekMelayu(m, x, y) {
+    let kekek = "";
+    kekek += `<rect class="piece" x="${x}" y="${y}" width="${m.m_lebar_kekek + m.basi_sambungan * 2}" height="${m.m_lebar_kekek + m.basi_sambungan * 2}" />
+      <rect class="sew-line" x="${x + m.basi_sambungan}" y="${y + m.basi_sambungan}" width="${m.m_lebar_kekek}" height="${m.m_lebar_kekek}" />`;
+    return kekek;
   }
 }
