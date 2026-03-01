@@ -426,7 +426,8 @@ class UI {
       svg = SvgBuilder.buildCuttingLayout(
         this.state.garment,
         measurements,
-        this.state.width
+        this.state.width,
+        this.state.leher
       );
 
       if (this.state.garment === "leherKurung") {
@@ -434,12 +435,6 @@ class UI {
         this.elements.leherRadio.style.display = "none";
       } else if (this.state.garment === "leherMelayu") {
         this.elements.widthToggle.style.display = "none";
-        this.elements.leherRadio.style.display = "block";
-      } else if (
-        this.state.garment === "bajuMelayu" ||
-        this.state.garment === "seluar"
-      ) {
-        this.elements.widthToggle.style.display = "block";
         this.elements.leherRadio.style.display = "block";
       } else {
         this.elements.widthToggle.style.display = "block";

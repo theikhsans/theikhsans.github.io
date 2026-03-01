@@ -13,7 +13,7 @@ class DraftState {
     this.measurementErrors = {};
     this.canvasVersion = 0;
     this.width = "45"; // New state property for width
-    this.leher = "cekak";
+    this.leher = "teluk";
 
     // Listeners
     this.listeners = [];
