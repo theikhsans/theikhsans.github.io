@@ -24,7 +24,6 @@ class UI {
       "basi_leher",
       "labuh_kain",
       "pinggul",
-      "pinggang",
       "kelonggaran",
       "susun_tepi",
       "bil_susun",
@@ -350,7 +349,7 @@ class UI {
           input.step = "1";
           break;
         default:
-          input.step = "0.1";
+          input.step = "0.01";
           break;
       }
 
@@ -413,7 +412,8 @@ class UI {
       svg = SvgBuilder.buildSewingPattern(
         this.state.garment,
         measurements,
-        this.state.leher
+        this.state.leher,
+        this.state.unit
       );
       this.elements.widthToggle.style.display = "none";
 
@@ -452,7 +452,6 @@ class UI {
    */
   _renderErrors() {
     const errorCount = Object.keys(this.state.measurementErrors).length;
-
     if (this.elements.errorMessage) {
       if (errorCount > 0) {
         this.elements.errorMessage.textContent = `${errorCount} pengukuran di luar batas yang diizinkan`;
