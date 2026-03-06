@@ -1,38 +1,41 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ms">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Penjana Pola Jahitan</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>Pola Baju Kurung dan Baju Melayu</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="index,follow">
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Poppins:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="./styles.css">
   </head>
-  <body>
-    <div class="app-container">
-      <!-- Top Navigation -->
-      <nav class="top-nav">
-        <h1 class="app-title">Pemapar Pola Jahitan</h1>
-        <!-- View Toggle -->
-        <section class="panel-section">
-          <div class="view-selector">
-            <button class="view-btn active" data-view="sewingPattern">
-              Pola Jahitan
-            </button>
-            <button class="view-btn" data-view="cuttingLayout">
-              Susun Atur Pola
-            </button>
-          </div>
-        </section>
-      </nav>
-
-      <!-- Main Layout -->
-      <div class="main-content">
-        <!-- Left Side Panel -->
-        <aside class="side-panel">
-          <!-- Garment Selection -->
-          <section class="panel-section">
-            <h2 class="section-title">Pola</h2>
-            <div class="garment-selector">
-              <select id="garmentSelect" class="garment-select">
+  <body class="gjs-t-body body-root" id="i2zg"><header class="header" id="i20qg">
+    <div class="header-container">
+      <div class="header-content">
+        <h1 class="gjs-t-h1 header-title" id="i46pd">Pola The Ikhsans</h1>
+        <p class="header-subtitle" id="i804m">
+          <div id="ibs8si">Pilih jenis pakaian dan saiz anda. Ubah ukuran yang diingini. Pola jahitan akan dipaparkan dengan serta-merta. Jelas, tepat dan direka khas untuk anda.</div>
+        </p>
+      </div>
+      <div id="igt0j" class="header-actions">
+        <div id="icomcn"></div>
+      </div>
+    </div>
+    <div class="gjs-t-border divider-header"></div>
+  </header>
+  <main class="main-content" id="iw19i">
+    <section id="measurements" class="section-measurements">
+      <section id="pattern-size-selector" aria-labelledby="pss-title" class="gjs-t-border pss-card">
+        <div id="i35oq9" class="pss-head">
+          <h2 id="pss-title" class="gjs-t-h2 pss-title">Pakaian dan Saiz</h2>
+        </div>
+        <div id="iq341r" class="pss-grid">
+          <div id="isat0o" class="pss-field">
+            <label for="garmentSelect" class="pss-label" id="i43oby">Pakaian</label>
+            <div class="pss-inputwrap" id="in6dy3">
+              <img src="https://api.iconify.design/lucide-shirt.svg?color=%232f3e46&amp;width=18&amp;height=18" alt="" aria-hidden="true" id="i5vlz8" class="pss-icon"/>
+              <select type="text" id="garmentSelect" aria-label="Select pattern type" aria-describedby="pss-helper-text" class="pss-select">
                 <option value="bajuKurung">Baju Kurung</option>
                 <option value="kain">Kain Susun Tepi</option>
                 <option value="leherKurung">Leher Baju Kurung</option>
@@ -41,13 +44,12 @@
                 <option value="leherMelayu">Leher Baju Melayu</option>
               </select>
             </div>
-          </section>
-
-          <!-- Size Selection -->
-          <section class="panel-section">
-            <h2 class="section-title">Saiz</h2>
-            <div class="size-selector">
-              <select id="sizeSelect" class="size-select">
+          </div>
+          <div id="inypod" class="pss-field">
+            <label for="sizeSelect" class="pss-label" id="ivsg9f">Saiz</label>
+            <div class="pss-inputwrap" id="i890jh">
+              <img src="https://api.iconify.design/lucide-ruler.svg?color=%232f3e46&amp;width=18&amp;height=18" alt="" aria-hidden="true" id="i4ei8g" class="pss-icon"/>
+              <select type="text" id="sizeSelect" aria-label="Select standard size" aria-describedby="pss-helper-text" class="pss-select">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="4">4</option>
@@ -62,72 +64,89 @@
                 <option value="XXL">XXL</option>
               </select>
             </div>
-          </section>
-
-          <!-- Measurements -->
-          <section class="panel-section">
-            <div class="width-toggle" style="display: none">
-              <h2 class="section-title">Bidang Kain</h2>
-              <div style="gap: 8px; display: flex; flex-direction: row-reverse">
-                <button class="width-btn" data-width="60">60</button>
-                <button class="width-btn active" data-width="45">45</button>
+          </div>
+        </div>
+        <div class="pss-field" id="leherRadio" style="display: block; padding-top: 15px;">
+              <label for="pss-pattern" class="pss-label" id="irckkw">Jenis Leher</label>
+              <div data-type-role="flex-row" class="gjs-plg-flex-row" id="i1450j">
+                <div data-type-role="flex-column" class="gjs-plg-flex-column" id="i3b9sa">
+                <input type="radio" id="teluk" name="jenis_leher" value="teluk" checked />
+                <label for="teluk">Teluk Belanga</label>
+                <br />
+                <input type="radio" id="cekak" name="jenis_leher" value="cekak" />
+                <label for="cekak">Cekak Musang</label>
+                <br />
+                <input type="radio" id="tunku" name="jenis_leher" value="tunku" />
+                <label for="tunku">Tunku/Mandarin</label>
               </div>
             </div>
-            <div class="leher-radio" id="leherRadio" style="display: none">
-              <h2 class="section-title">Jenis Leher</h2>
-              <input
-                type="radio"
-                id="teluk"
-                name="jenis_leher"
-                value="teluk"
-                checked
-              />
-              <label for="teluk">Teluk Belanga</label><br />
-
-              <input type="radio" id="cekak" name="jenis_leher" value="cekak" />
-              <label for="cekak">Cekak Musang</label><br />
-
-              <input type="radio" id="tunku" name="jenis_leher" value="tunku" />
-              <label for="tunku">Tunku/Mandarin</label>
+        </div>
+        <div id="bidang" class="pss-field">
+          <span id="ietre" class="width-indicator">
+            <div class="width-toggle" style="padding-top: 15px;">
+              <label class="pss-label" id="ivsg9f">Bidang</label>
+              <div class="toggle-group">
+                <button type="button" id="widthToggle45" aria-pressed="true" aria-label="Bidang 45" class="toggle-btn" data-width="45">45</button>
+                <button type="button" id="widthToggle60" aria-pressed="false" aria-label="Bidang 60" class="toggle-btn" data-width="60">60</button>             
+              </div>
             </div>
-            <h2 class="section-title">Ukuran</h2>
-            <div
-              class="unit-toggle"
-              style="
-                padding-bottom: 25px;
-                display: flex;
-                flex-direction: row-reverse;
-              "
-            >
-              <button class="unit-btn active" data-unit="inci">inci</button>
-              <button class="unit-btn" data-unit="cm">cm</button>
+          </span>
+        </div>
+      </section>
+      <div class="gjs-t-border card-measurements" id="ilfv2">
+        <div class="card-header">
+          <h2 class="gjs-t-h2 card-title" id="iketh">Ukuran</h2>
+          <span id="ietre" class="unit-indicator">
+            <img src="https://api.iconify.design/lucide-ruler.svg?color=%236c757d" alt="" loading="eager" class="icon-ruler"/>
+            <span id="i8wv6j">Unit:</span>
+            <div class="toggle-group unit-toggle">
+              <button type="button" id="unitToggleCm" aria-pressed="false" aria-label="Use centimeters" class="toggle-btn" data-unit="cm">cm</button>
+              <button type="button" id="unitToggleIn" aria-pressed="true" aria-label="Use inches" class="toggle-btn" data-unit="inci">inci</button>
             </div>
-            <div class="measurements-grid" id="measurementContainer">
-              <!-- Populated by JavaScript -->
-            </div>
-            <div
-              id="errorMessage"
-              class="error-message"
-              style="display: none"
-            ></div>
-          </section>
-        </aside>
-
+          </span>
+        </div>
+        <form method="get" id="measureForm" novalidate="" class="form-measurements">
+          <div class="fields-grid" id="measurementContainer">
+            <!-- Populated by JavaScript -->
+          </div>
+        </form>
+        <div id="errorMessage" class="error-message" style="display: none"></div>
+      </div>
+      <div id="pattern" class="gjs-t-border card-canvas">
+        <div id="ibu771" class="canvas-header">
+          <h2 id="iwg72q" class="gjs-t-h2 canvas-title">Pola</h2>
+          <div aria-label="Canvas view toggle" role="group" class="toggle-group view-toggle">
+            <button type="button" id="viewTogglePattern" aria-pressed="true" aria-label="Show Sewing Pattern" class="toggle-btn" data-view="sewingPattern">Sewing Pattern</button>
+            <button type="button" id="viewToggleLayout" aria-pressed="false" aria-label="Show Cutting Layout" class="toggle-btn" data-view="cuttingLayout">Cutting Layout</button>
+          </div>
+          <div id="ifc2wc" class="canvas-tools"></div>
+        </div>
         <!-- Canvas Area -->
-        <main class="canvas-area">
+        <!-- <main class="canvas-area"> -->
           <div class="svg-container" id="svgContainer">
             <!-- SVG rendered here -->
           </div>
-        </main>
+        <!-- </main> -->
+        <!-- <div class="gjs-t-border canvas-frame">
+          <svg id="patternSvg" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sewing pattern preview" class="svg-canvas">
+            <title>Custom-fit sewing pattern preview</title>
+            <desc>The canvas displays a basic bodice front pattern adjusted to your measurements, with grid, labels, and seam allowances.</desc>
+          </svg>
+        </div> -->
       </div>
+    </section>
+  </main>
+  <footer class="gjs-t-border footer">
+    <div class="footer-container" id="ir2o2s">
+      <div class="footer-text" id="iwwhuh">© 2026 The Ikhsans</div>
+      <div id="iz42ks" class="footer-links"></div>
     </div>
-
-    <!-- Scripts -->
+  </footer>
+  <!-- Scripts -->
     <script src="js/measurements.js"></script>
     <script src="js/validation.js"></script>
     <script src="js/state.js"></script>
     <script src="js/svg-builder.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/app.js"></script>
-  </body>
 </html>

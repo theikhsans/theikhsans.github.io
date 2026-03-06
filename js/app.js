@@ -3,7 +3,7 @@
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-  //console.log("Initializing Sewing Pattern App...");
+  console.log("Initializing Sewing Pattern App...");
 
   // Check if appState and UI are available
   if (typeof appState === "undefined") {
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   try {
     const ui = new UI(appState);
     ui.render();
-    //console.log("App ready!", appState);
+    console.log("App ready!", appState);
   } catch (e) {
     console.error("Error during app initialization:", e);
   }

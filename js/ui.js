@@ -74,16 +74,19 @@ class UI {
     // Cache DOM elements (use fallbacks to match existing HTML structure)
     this.elements = {
       // Top nav (buttons may be static elements with data-view)
-      sewingPatternBtn:
-        document.getElementById("sewingPatternBtn") ||
-        document.querySelector('.view-btn[data-view="sewingPattern"]'),
-      cuttingLayoutBtn:
-        document.getElementById("cuttingLayoutBtn") ||
-        document.querySelector('.view-btn[data-view="cuttingLayout"]'),
+      // sewingPatternBtn:
+      //   document.getElementById("sewingPatternBtn") ||
+      //   document.querySelector('.view-btn[data-view="sewingPattern"]'),
+      // cuttingLayoutBtn:
+      //   document.getElementById("cuttingLayoutBtn") ||
+      //   document.querySelector('.view-btn[data-view="cuttingLayout"]'),
+      viewToggle:
+        document.getElementById("viewToggle") ||
+        document.querySelector(".view-toggle"),
       unitToggle:
         document.getElementById("unitToggle") ||
         document.querySelector(".unit-toggle"),
-      unitLabel: document.getElementById("unitLabel") || null,
+      //unitLabel: document.getElementById("unitLabel") || null,
       widthToggle:
         document.getElementById("widthToggle") ||
         document.querySelector(".width-toggle"),
@@ -125,21 +128,37 @@ class UI {
    */
   _attachEventListeners() {
     // View buttons (support buttons with data-view)
-    if (this.elements.sewingPatternBtn) {
-      this.elements.sewingPatternBtn.addEventListener("click", () =>
-        this.state.setView("sewingPattern")
-      );
-    }
-    if (this.elements.cuttingLayoutBtn) {
-      this.elements.cuttingLayoutBtn.addEventListener("click", () =>
-        this.state.setView("cuttingLayout")
-      );
+    // if (this.elements.sewingPatternBtn) {
+    //   this.elements.sewingPatternBtn.addEventListener("click", () =>
+    //     this.state.setView("sewingPattern")
+    //   );
+    // }
+    // if (this.elements.cuttingLayoutBtn) {
+    //   this.elements.cuttingLayoutBtn.addEventListener("click", () =>
+    //     this.state.setView("cuttingLayout")
+    //   );
+    // }
+
+    // View toggle (support .view-toggle container with .toggle-btn children)
+    if (this.elements.viewToggle) {
+      this.elements.viewToggle.addEventListener("click", (e) => {
+        const btn = e.target.closest && e.target.closest(".toggle-btn");
+        if (btn && btn.dataset && btn.dataset.view) {
+          this.state.setView(btn.dataset.view);
+        } else {
+          const newUnit =
+            this.state.view === "sewingPattern"
+              ? "cuttingLayout"
+              : "sewingPattern";
+          this.state.setUnit(newUnit);
+        }
+      });
     }
 
     // Unit toggle (support .unit-toggle container with .unit-btn children)
     if (this.elements.unitToggle) {
       this.elements.unitToggle.addEventListener("click", (e) => {
-        const btn = e.target.closest && e.target.closest(".unit-btn");
+        const btn = e.target.closest && e.target.closest(".toggle-btn");
         if (btn && btn.dataset && btn.dataset.unit) {
           this.state.setUnit(btn.dataset.unit === "cm" ? "cm" : "inci");
         } else {
@@ -215,14 +234,14 @@ class UI {
    * Update button active states
    */
   _updateButtonStates() {
-    this.elements.sewingPatternBtn?.classList.toggle(
-      "active",
-      this.state.view === "sewingPattern"
-    );
-    this.elements.cuttingLayoutBtn?.classList.toggle(
-      "active",
-      this.state.view === "cuttingLayout"
-    );
+    // this.elements.sewingPatternBtn?.classList.toggle(
+    //   "active",
+    //   this.state.view === "sewingPattern"
+    // );
+    // this.elements.cuttingLayoutBtn?.classList.toggle(
+    //   "active",
+    //   this.state.view === "cuttingLayout"
+    // );
   }
 
   /**
@@ -237,9 +256,9 @@ class UI {
     }
 
     // Update unit label
-    if (this.elements.unitLabel) {
-      this.elements.unitLabel.textContent = this.state.unit.toUpperCase();
-    }
+    // if (this.elements.unitLabel) {
+    //   this.elements.unitLabel.textContent = this.state.unit.toUpperCase();
+    // }
 
     // Update garment button active states (if using button group)
     if (this.elements.garmentButtons && this.elements.garmentButtons.length) {
@@ -258,20 +277,28 @@ class UI {
       });
     }
 
+    // Update view button active states inside view-toggle
+    if (this.elements.viewToggle) {
+      const viewBtns = this.elements.viewToggle.querySelectorAll(".toggle-btn");
+      viewBtns.forEach((b) => {
+        b.ariaPressed = b.dataset.view === this.state.view;
+      });
+    }
+
     // Update unit button active states inside unit-toggle
     if (this.elements.unitToggle) {
-      const unitBtns = this.elements.unitToggle.querySelectorAll(".unit-btn");
+      const unitBtns = this.elements.unitToggle.querySelectorAll(".toggle-btn");
       unitBtns.forEach((b) => {
-        b.classList.toggle("active", b.dataset.unit === this.state.unit);
+        b.ariaPressed = b.dataset.unit === this.state.unit;
       });
     }
 
     // Update width button active states inside width-toggle
     if (this.elements.widthToggle) {
       const widthBtns =
-        this.elements.widthToggle.querySelectorAll(".width-btn");
+        this.elements.widthToggle.querySelectorAll(".toggle-btn");
       widthBtns.forEach((b) => {
-        b.classList.toggle("active", b.dataset.width === this.state.width);
+        b.ariaPressed = b.dataset.width === this.state.width;
       });
     }
   }
@@ -329,18 +356,20 @@ class UI {
       const hasError = this.state.measurementErrors[key];
 
       const fieldDiv = document.createElement("div");
-      fieldDiv.className = "measurement-field";
+      fieldDiv.className = "field-measure";
 
-      const label = document.createElement("div");
-      label.className = "measurement-label";
-      label.htmlFor = `input-${key}`;
+      const label = document.createElement("label");
+      label.className = "label-measure";
+      label.htmlFor = `${key}`;
       label.textContent = `${rule.label}`;
 
       const inputGroup = document.createElement("div");
-      inputGroup.className = "measurement-input-group";
+      inputGroup.className = "input-group-measure";
 
       const input = document.createElement("input");
-      input.id = `input-${key}`;
+      input.classList.add("gjs-t-border");
+      input.classList.add("input-measure");
+      input.id = `${key}`;
       input.type = "number";
       input.value = displayValue;
 
@@ -353,14 +382,14 @@ class UI {
           break;
       }
 
-      input.className = "measurement-input" + (hasError ? " error" : "");
+      //input.className = "measurement-input" + (hasError ? " error" : "");
 
       input.addEventListener("change", (e) => {
         this.state.updateMeasurement(key, e.target.value);
       });
 
-      const unit = document.createElement("div");
-      unit.className = "measurement-unit";
+      const unit = document.createElement("span");
+      unit.className = "suffix";
       unit.textContent = this.state.unit;
 
       inputGroup.appendChild(input);
