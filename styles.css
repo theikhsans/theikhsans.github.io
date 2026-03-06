@@ -839,6 +839,9 @@ video {
   font-family: Poppins;
   font-weight: 600;
 }
+.view-toggle {
+  margin-left: auto;
+}
 .canvas-tools {
   display: flex;
   align-items: center;
