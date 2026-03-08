@@ -12,13 +12,9 @@ class DraftState {
     this.measurements = {};
     this.measurementErrors = {};
     this.canvasVersion = 0;
-    this.width = "45"; // New state property for width
+    this.width = "45";
     this.leher = "teluk";
-
-    // Listeners
     this.listeners = [];
-
-    // Initialize with default measurements
     this._loadSizeDefaults();
   }
 
@@ -89,7 +85,6 @@ class DraftState {
     if (this.size !== newSize) {
       this.size = newSize;
       this._loadSizeDefaults();
-      //this._convertToCurrentUnit();
       this._bumpCanvasVersion();
     }
   }
@@ -100,7 +95,6 @@ class DraftState {
   setUnit(newUnit) {
     if (this.unit !== newUnit) {
       this.unit = newUnit;
-      // this._convertToCurrentUnit();
       this._revalidateMeasurements();
       this._bumpCanvasVersion();
     }
@@ -132,7 +126,6 @@ class DraftState {
   updateMeasurement(key, value) {
     const numValue = parseFloat(value);
     if (!isNaN(numValue)) {
-      // Store in cm internally
       let cmValue = 0;
 
       switch (key) {
@@ -145,10 +138,7 @@ class DraftState {
       }
 
       this.measurements[key] = cmValue;
-
-      // Validate
       this._validateMeasurement(key);
-
       this._bumpCanvasVersion();
     }
   }

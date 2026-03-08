@@ -31,19 +31,20 @@ Single-page vanilla JS app that generates sewing patterns as SVGs. Data flows: H
 3. `updateMeasurement()` converts to cm if needed: `cmValue = this.unit === 'cm' ? numValue : this._inchToCm(numValue)`.
 4. Value validated against `MeasurementRule` min/max; errors stored in `measurementErrors`.
 5. `_bumpCanvasVersion()` increments counter and notifies all listeners.
-6. `UI.render()` checks version change; if changed, calls `SvgBuilder.buildSewingPattern(garmentType, measurements)` (or `buildCuttingLayout`) with cm measurements.
+6. `UI.render()` checks version change; if changed, calls `SvgBuilder.buildSewingPattern(garmentType, measurements, leherType, unit)` (or `buildCuttingLayout`) with cm measurements.
 7. SVG string injected into `svgContainer.innerHTML`.
 
-**Key detail**: `UI.getMeasurement(key)` returns display value (converted to current unit); `state.getMeasurementsInCm()` returns cm dict for SVG builder.
+**Key detail**: `UI.getMeasurement(key)` returns display value (converted to current unit); `state.getMeasurementsInCm()` returns cm dict for SVG builder. For neck variations (leherMelayu), `state.leher` holds the selected type (teluk/cekak/tunku).
 
 ## Implementing New Patterns
 
-1. Add method `_garmentNamePattern(m)` and `_garmentNameCuttingLayout(m)` in `SvgBuilder`.
-2. Add cases to switch statements in `buildSewingPattern()` and `buildCuttingLayout()`.
+1. Add method `_garmentNamePattern(m, u)` and `_garmentNameCuttingLayout(m, width)` in `SvgBuilder`.
+2. Add cases to switch statements in `buildSewingPattern(garmentType, measurements, leherType, unit)` and `buildCuttingLayout(garmentType, measurements, width, leherType)`.
 3. Use hardcoded pixel origins (e.g., `const x0 = 50, y0 = 25`) for positioning; parameter `m` contains cm measurements.
 4. Return SVG string with embedded `<style>` for `.piece`, `.grain`, `.label`, `.fold` classes.
+5. For patterns with neck variations, check the `leherType` parameter within the method to adjust geometry.
 
-Example: `_bajuKurungPattern(m)` reads `m.lebar`, `m.labuh` (cm) and outputs SVG with piece coordinates calculated from these values.
+Example: `_bajuKurungPattern(m, u)` reads `m.lebar`, `m.labuh` (cm) and outputs SVG with piece coordinates calculated from these values.
 
 ## Adding Measurements
 
@@ -78,13 +79,33 @@ UI strings are in **Bahasa Melayu**. Label objects in measurements.js map keys t
 - **Canvas not updating**: Check `svgContainer.innerHTML` assignment; verify SVG string is being generated.
 - **Unit conversion issues**: Confirm `_cmToInch()` and `_inchToCm()` are used correctly in getters/setters.
 
+## Implemented Garments
+
+Six garment types fully implemented with both sewing patterns and cutting layouts:
+
+1. **Baju Kurung** — Traditional Malay tunic with kekek detail
+2. **Kain Susun Tepi** — Skirt with edge pleats (varies by size)
+3. **Leher Baju Kurung** — Neckline trim for Baju Kurung
+4. **Baju Melayu** — Formal Malay shirt with placket
+5. **Seluar** — Trousers
+6. **Leher Baju Melayu** — Neckline trim for Baju Melayu with three style variations (notched/teluk, straight/cekak, V-shaped/tunku)
+
+## Neck Type Parameter
+
+For `leherMelayu` garment, the `leherType` parameter controls style:
+
+- `"teluk"` (default): Notched neckline (U-shaped)
+- `"cekak"`: Straight neckline
+- `"tunku"`: V-shaped neckline
+
+Set via `appState.setLeher(type)` in state.js; UI provides radio buttons for selection.
+
 ## Project Constraints
 
 - **No build system**: Vanilla JS modules loaded via script tags; edits live after refresh.
 - **No npm/bundler**: Do not add dependencies or build-only code without explaining how to run it.
 - **Global scope**: `DraftState`, `UI`, `SvgBuilder` classes and `appState` instance are global.
 - **Canonical unit**: Measurements always stored in cm; never change storage unit.
-- **Incomplete garments**: Baju Melayu and Baju Kebaya are placeholders; only Baju Kurung is fully implemented.
 
 ## When to Escalate
 

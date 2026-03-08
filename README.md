@@ -9,16 +9,29 @@ Pure vanilla JavaScript web application for generating and displaying sewing pat
    - No dependencies to install
    - Works offline
 
-2. **Select a garment**: Choose from Baju Kurung, Baju Melayu, or Baju Kebaya
+2. **Select a garment**: Choose from six Malay clothing types:
+   - Baju Kurung (traditional tunic)
+   - Kain Susun Tepi (skirt with edge pleats)
+   - Leher Baju Kurung (neckline trim)
+   - Baju Melayu (formal shirt)
+   - Seluar (trousers)
+   - Leher Baju Melayu (neckline trim with 3 style variations)
 
-3. **Choose a size**: Pick size S, M, or L
+3. **Choose a size**: Select from multiple size options:
+   - Letter sizes: XS, S, M (default), L, XL, XXL
+   - Numeric sizes: 1, 2, 4, 6, 8, 10
 
-4. **Adjust measurements**: 
+4. **Adjust measurements**:
    - All default measurements are in centimeters
    - Toggle between cm and inches using the unit button
    - Invalid entries are highlighted in red
 
-5. **View patterns**: Switch between "Pola Jahitan" (Sewing Pattern) and "Susun Potong" (Cutting Layout)
+5. **View patterns**: Switch between "Pola Jahitan" (Sewing Pattern) and "Susun Atur Pola" (Cutting Layout)
+
+6. **Neck type variations** (for Leher Baju Melayu):
+   - Teluk (notched/U-shaped neckline)
+   - Cekak (collar neckline)
+   - Tunku (collar neckline)
 
 ## Features
 
@@ -49,20 +62,24 @@ PATTERN_GENERATOR/
 ## File Descriptions
 
 ### HTML & CSS
-- **index.html**: Semantic HTML structure with sections for:
-  - Top navigation (view toggle, unit selector)
-  - Left control panel (garment/size selection, measurement fields)
-  - Central canvas area (SVG pattern display)
-  - Error messages display
 
-- **styles.css**: 350 lines of CSS including:
+- **index.html**: Semantic HTML structure with layout sections:
+  - **Header**: Title "Pola The Ikhsans" with subtitle
+  - **Main section**: Organized with:
+    - Pattern/Size selector card (garment dropdown, size dropdown, leher type radio buttons, fabric width toggle)
+    - Canvas display card (Pola Jahitan/Susun Atur Pola view toggle, SVG container)
+    - Measurements edit card (unit toggle: cm/inci, measurement input fields)
+  - **Error display**: Inline validation messages on invalid entries
+
+- **styles.css**: Optimized CSS including:
   - Responsive flexbox layout
   - Mobile-first breakpoints (768px, 1024px)
-  - Form styling with validation states
+  - Form styling with validation states and custom radio button colors
   - Canvas area styling
   - Material Design color scheme
 
 ### JavaScript Modules
+
 - **state.js** (180 lines): `DraftState` class
   - Single source of truth for app state
   - Observer pattern with `addListener()`/`_notifyListeners()`
@@ -72,7 +89,8 @@ PATTERN_GENERATOR/
   - `_bumpCanvasVersion()` triggers UI updates
 
 - **measurements.js** (40 lines): Data layer
-  - `sizeMeasurements`: S/M/L presets with cm values
+  - `sizeMeasurements`: Size presets (indexed by numeric keys 1, 2, 4...) with cm values
+  - UI displays sizes as: XS, S, M, L, XL, XXL (letter) or numeric 1-10
   - `garmentLabels`: Display labels for garment types
   - `viewLabels`: Display labels for view modes
 
@@ -83,13 +101,13 @@ PATTERN_GENERATOR/
 
 - **svg-builder.js** (250+ lines): Pattern generation
   - `SvgBuilder` static class
-  - `buildSewingPattern()`: Main pattern view with seam allowances
-  - `buildCuttingLayout()`: Fabric cutting arrangement
+  - `buildSewingPattern(garmentType, measurements, leherType, unit)`: Main pattern view with seam allowances
+  - `buildCuttingLayout(garmentType, measurements, width, leherType)`: Fabric cutting arrangement
   - Grain line indicators
   - Fold line markers
-  - Hardcoded pixel origins (100, 100)
-  - Currently: Baju Kurung fully implemented
-  - Placeholders: Baju Melayu, Baju Kebaya
+  - Hardcoded pixel origins for positioning
+  - Six garment types fully implemented with both sewing patterns and cutting layouts
+  - Supports `leherType` parameter (teluk/cekak/tunku) for neck variations
 
 - **ui.js** (150+ lines): User interface layer
   - `UI` class with DOM element caching
@@ -108,14 +126,18 @@ PATTERN_GENERATOR/
 ## Architecture & Design Patterns
 
 ### State Management
+
 Uses **Observer Pattern** (not Redux/MobX):
+
 - `DraftState` maintains single source of truth
 - Components call `state.addListener(callback)`
 - When state changes: `_notifyListeners()` triggers all callbacks
 - UI re-renders on state changes via listener
 
 ### Measurement System
+
 **Internal storage ALWAYS in centimeters**:
+
 1. All measurements stored in `DraftState._measurements` as cm values
 2. User input converted to cm before storage
 3. Validation rules defined in cm
@@ -123,18 +145,20 @@ Uses **Observer Pattern** (not Redux/MobX):
 5. When unit changes: all values revalidated in cm
 
 ### Component Communication
+
 ```
-User Input (UI) 
-    → state.updateMeasurement() 
-    → validate in cm 
-    → store in cm 
-    → _bumpCanvasVersion() 
-    → listeners fire 
+User Input (UI)
+    → state.updateMeasurement()
+    → validate in cm
+    → store in cm
+    → _bumpCanvasVersion()
+    → listeners fire
     → UI.render()
     → canvas updates with measurement display in current unit
 ```
 
 ### SVG Generation Flow
+
 1. `UI._renderCanvas()` calls `SvgBuilder.buildSewingPattern()` or `buildCuttingLayout()`
 2. SvgBuilder receives measurements map (in cm)
 3. Generates SVG string with template literals
@@ -145,6 +169,7 @@ User Input (UI)
 ## Testing
 
 Open `test.html` in a browser to run the test suite:
+
 - Module loading tests
 - DraftState functionality tests
 - Measurement data validation
@@ -155,11 +180,13 @@ Open `test.html` in a browser to run the test suite:
 ## Adding New Measurements
 
 1. **Add validation rule** in `js/validation.js`:
+
    ```javascript
    'new_key': new MeasurementRule(min, max, 'Display Label'),
    ```
 
 2. **Add default value** in `js/measurements.js`:
+
    ```javascript
    'S': { ..., 'new_key': 123.4 },
    'M': { ..., 'new_key': 125.6 },
@@ -172,15 +199,17 @@ Open `test.html` in a browser to run the test suite:
 
 1. **Add to state** (already in code): Just needs to match in next steps
 2. **Implement SVG patterns** in `svg-builder.js`:
+
    ```javascript
    static _newGarmentPattern(m) {
        // Return SVG string
    }
-   
+
    static _newGarmentCuttingLayout(m) {
        // Return SVG string
    }
    ```
+
 3. **Update buildSewingPattern() and buildCuttingLayout()** switch cases
 
 ## Unit Conversion
@@ -209,20 +238,24 @@ Open `test.html` in a browser to run the test suite:
 ## Language
 
 All UI text is in **Bahasa Melayu**:
+
 - Garment names: Baju Kurung, Baju Melayu, Baju Kebaya
-- View modes: Pola Jahitan (Sewing Pattern), Susun Potong (Cutting Layout)
+- View modes: Pola Jahitan (Sewing Pattern), Susun Atur Pola (Cutting Layout)
 - Measurement labels: In Malay with descriptions
 - Error messages: In Malay
 
 ## Development
 
 ### Hot Reload
+
 Since there's no build process, changes take effect immediately:
+
 1. Edit any `.js` or `.css` file
 2. Refresh the browser (F5)
 3. Changes appear instantly
 
 ### Debugging
+
 - Open browser DevTools (F12)
 - Console logs available in state.js setters
 - All objects are in global scope for inspection:
@@ -230,7 +263,9 @@ Since there's no build process, changes take effect immediately:
   - `DraftState`, `UI`, `SvgBuilder`, `measurementRules`: Class definitions
 
 ### Adding Logging
+
 Open `js/state.js` and uncomment/add `console.log()` statements in setters:
+
 ```javascript
 setGarment(newGarment) {
     console.log('Setting garment to:', newGarment);
@@ -238,24 +273,6 @@ setGarment(newGarment) {
 }
 ```
 
-## Troubleshooting
-
-| Issue | Solution |
-|-------|----------|
-| Blank canvas | Check browser console for errors; verify `index.html` paths are correct |
-| Invalid measurements shown | Check `js/validation.js` rules are reasonable |
-| Unit toggle doesn't work | Ensure `setUnit()` in state.js is called; check unit values are 'cm' or 'inch' |
-| New measurement not appearing | Add rule in validation.js, default in measurements.js (UI renders automatically) |
-| SVG not scaling correctly | Check hardcoded origins (x0, y0) in svg-builder.js match canvas size |
-
 ## License
 
 This HTML/CSS/JS version is a faithful conversion of the original Flutter sewing_pattern_app project.
-
-## Next Steps
-
-- Implement Baju Melayu and Baju Kebaya patterns
-- Add PDF export functionality
-- Implement measurement history/presets
-- Add fabric yardage calculator
-- Mobile app optimization

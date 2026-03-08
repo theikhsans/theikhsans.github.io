@@ -126,7 +126,7 @@ class SvgBuilder {
             <text x="120" y="100" class="info">E-F = Bukaan Lengan</text>
             <text x="120" y="105" class="info">&emsp;&ensp; = ${u === "cm" ? m.bukaan_lengan.toFixed(1) + " cm" : (m.bukaan_lengan / 2.54).toFixed(2) + " inci"}</text>
             <text x="120" y="110" class="info">H-J dan H-K = Kekek</text>
-            <text x="120" y="115" class="info">&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;= ${u === "cm" ? m.lebar_kekek.toFixed(1) + " cm" : (m.lebar_kekek / 2.54).toFixed(2) + " inci"}</text>
+            <text x="120" y="115" class="info">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;= ${u === "cm" ? m.lebar_kekek.toFixed(1) + " cm" : (m.lebar_kekek / 2.54).toFixed(2) + " inci"}</text>
             <text x="120" y="120" class="info">G-H = Pesak Atas</text>
             <text x="120" y="125" class="info">&emsp;&emsp; = ${u === "cm" ? m.pesak_atas.toFixed(1) + " cm" : (m.pesak_atas / 2.54).toFixed(2) + " inci"}</text>
             <text x="120" y="130" class="info">C-I = Pesak Bawah</text>
@@ -209,14 +209,14 @@ class SvgBuilder {
 
             <!-- Info Labels -->
             <text x="40" y="180" class="info">A-B dan D-C = Keliling Pinggul + Kelonggaran Pinggul + ${u === "cm" ? "3.0 cm" : (3 / 2.54).toFixed(2) + " inci"}</text>
-            <text x="40" y="190" class="info">&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;= ${u === "cm" ? (m.pinggul + m.kelonggaran + 3).toFixed(1) + " cm" : ((m.pinggul + m.kelonggaran + 3) / 2.54).toFixed(2) + " inci"}</text>
+            <text x="40" y="190" class="info">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;= ${u === "cm" ? (m.pinggul + m.kelonggaran + 3).toFixed(1) + " cm" : ((m.pinggul + m.kelonggaran + 3) / 2.54).toFixed(2) + " inci"}</text>
             <text x="40" y="200" class="info">A-D dan B-C = ${u === "cm" ? "5.0 cm" : "2.00 inci"}</text>
             <text x="40" y="210" class="info">E-H dan F-G = Labuh Kain</text>
             <text x="40" y="220" class="info">&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;= ${u === "cm" ? m.labuh_kain.toFixed(1) + " cm" : (m.labuh_kain / 2.54).toFixed(2) + " inci"}</text>
             <text x="40" y="230" class="info">E-I = Keliling Pinggul + Kelonggaran Pinggul</text>
             <text x="40" y="240" class="info">&emsp;&ensp;= ${u === "cm" ? (m.pinggul + m.kelonggaran).toFixed(1) + " cm" : ((m.pinggul + m.kelonggaran) / 2.54).toFixed(2) + " inci"}</text>
             <text x="40" y="250" class="info">I-J, J-K${m.bil_susun == 3 ? " dan K-F" : m.bil_susun == 4 ? ", K-L dan L-F" : ", K-L, L-M dan M-F"} = Ukuran Susun Tepi</text>
-            <text x="40" y="260" class="info">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;${m.bil_susun == 3 ? "&ensp;" : m.bil_susun == 4 ? "&emsp;&ensp;" : "&emsp;&emsp;&emsp;&emsp;&ensp;"}= ${u === "cm" ? m.susun_tepi.toFixed(1) + " cm" : (m.susun_tepi / 2.54).toFixed(2) + " inci"}</text>
+            <text x="40" y="260" class="info">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;${m.bil_susun == 3 ? " " : m.bil_susun == 4 ? "&emsp;&emsp; " : "&emsp;&emsp;&emsp;&emsp;&emsp; "}= ${u === "cm" ? m.susun_tepi.toFixed(1) + " cm" : (m.susun_tepi / 2.54).toFixed(2) + " inci"}</text>
 
         </svg>`;
 
@@ -383,9 +383,9 @@ class SvgBuilder {
             <text x="115" y="130" class="info">C-I = Pesak Bawah</text>
             <text x="115" y="135" class="info">&emsp;&ensp; = ${u === "cm" ? m.m_pesak_bawah.toFixed(1) + " cm" : (m.m_pesak_bawah / 2.54).toFixed(2) + " inci"}</text>
             <text x="115" y="140" class="info">Panjang Poket Atas = Poket Atas + ${u === "cm" ? poketExtra.toFixed(1) + " cm" : (poketExtra / 2.54).toFixed(2) + " inci"}</text>
-            <text x="115" y="145" class="info">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; = ${u === "cm" ? (m.poket_atas + Math.round((poketExtra + Number.EPSILON) * 10) / 10).toFixed(1) + " cm" : ((m.poket_atas + Math.round((poketExtra + Number.EPSILON) * 100) / 100) / 2.54).toFixed(2) + " inci"}</text>
+            <text x="115" y="145" class="info">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; = ${u === "cm" ? (m.poket_atas + Math.round((poketExtra + Number.EPSILON) * 10) / 10).toFixed(1) + " cm" : ((m.poket_atas + Math.round((poketExtra + Number.EPSILON) * 100) / 100) / 2.54).toFixed(2) + " inci"}</text>
             <text x="115" y="150" class="info">Panjang Poket Bawah = Poket Bawah + ${u === "cm" ? 0.7 + " cm" : (0.635 / 2.54).toFixed(2) + " inci"}</text>
-            <text x="115" y="155" class="info">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; = ${u === "cm" ? (m.poket_bawah + 0.7).toFixed(1) + " cm" : ((m.poket_bawah + 0.635) / 2.54).toFixed(2) + " inci"}</text>
+            <text x="115" y="155" class="info">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; = ${u === "cm" ? (m.poket_bawah + 0.7).toFixed(1) + " cm" : ((m.poket_bawah + 0.635) / 2.54).toFixed(2) + " inci"}</text>
             <text x="115" y="160" class="info">Jarak Poket Atas Dari Atas Baju = Turun Lengan</text>
             <text x="115" y="165" class="info">Jarak Poket Bawah Dari Hujung Baju = ${u === "cm" ? jarakPoket.toFixed(1) + " cm" : (jarakPoket / 2.54).toFixed(2) + " inci"}</text>
 
@@ -704,8 +704,8 @@ class SvgBuilder {
             <text x="40" y="42" class="info">a-b dan Z-Y = ${u === "cm" ? "1.9 cm" : (1.905 / 2.54).toFixed(2) + " inci"}</text>
             <text x="40" y="44" class="info">a-Z dan b-Y = Belahan Leher + ${u === "cm" ? "1.3 cm" : (1.27 / 2.54).toFixed(2) + " inci"}</text>
             <text x="40" y="46" class="info">&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;= ${u === "cm" ? tinggiTulangBawah.toFixed(1) + " cm" : (tinggiTulangBawah / 2.54).toFixed(2) + " inci"}</text>
-            <text x="40" y="48" class="info">W-a, X-b, c-j dan d-k = Basi Leher</text>
-            <text x="40" y="50" class="info">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;= ${u === "cm" ? m.basi_leher.toFixed(1) + " cm" : (m.basi_leher / 2.54).toFixed(2) + " inci"}</text>
+            <text x="40" y="48" class="info">W-a dan d-k = Basi Leher</text>
+            <text x="40" y="50" class="info">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;= ${u === "cm" ? m.basi_leher.toFixed(1) + " cm" : (m.basi_leher / 2.54).toFixed(2) + " inci"}</text>
             <text x="40" y="52" class="info">c-d = ${u === "cm" ? (lebarTulangAtas / 2).toFixed(1) + " cm" : (lebarTulangAtas / 2 / 2.54).toFixed(2) + " inci"}</text>
             <text x="40" y="54" class="info">j-k, h-f dan l-m = ${u === "cm" ? lebarTulangAtas.toFixed(1) + " cm" : (lebarTulangAtas / 2.54).toFixed(2) + " inci"}</text>
             <text x="40" y="56" class="info">j-h dan k-f = a-Z + ${u === "cm" ? "3.8 cm" : (3.81 / 2.54).toFixed(2) + " inci"}</text>
@@ -821,7 +821,6 @@ class SvgBuilder {
         m.susun_tepi * m.bil_susun +
         m.basi_sambungan * 8
     ) {
-      //layout 1
       kain += `<rect class="piece" x="${x4}" y="${y0}" width="${m.pinggul + m.kelonggaran + m.susun_tepi * m.bil_susun + m.basi_sambungan * 2}" height="${m.labuh_kain + m.basi_sambungan * 2}" /> 
               <rect class="sew-line" x="${x4 + m.basi_sambungan}" y="${y0 + m.basi_sambungan}" width="${m.pinggul + m.kelonggaran + m.susun_tepi * m.bil_susun}" height="${m.labuh_kain}" />
               <text class="label" transform="rotate(270, ${x4 + (m.pinggul + m.kelonggaran + m.susun_tepi * m.bil_susun) / 2}, ${y0 + m.labuh_kain / 2})" x="${x4 + (m.pinggul + m.kelonggaran + m.susun_tepi * m.bil_susun) / 2}" y="${y0 + m.labuh_kain / 2}">Kain</text>`;
@@ -864,7 +863,6 @@ class SvgBuilder {
         m.susun_tepi * m.bil_susun +
         m.basi_sambungan * 4
     ) {
-      //layout 2
       kain += `<rect class="piece" x="${x4}" y="${y0}" width="${m.pinggul + m.kelonggaran + m.susun_tepi * m.bil_susun + m.basi_sambungan * 2}" height="${m.labuh_kain + m.basi_sambungan * 2}" /> 
               <rect class="sew-line" x="${x4 + m.basi_sambungan}" y="${y0 + m.basi_sambungan}" width="${m.pinggul + m.kelonggaran + m.susun_tepi * m.bil_susun}" height="${m.labuh_kain}" />
               <text class="label" transform="rotate(270, ${x4 + (m.pinggul + m.kelonggaran + m.susun_tepi * m.bil_susun) / 2}, ${y0 + m.labuh_kain / 2})" x="${x4 + (m.pinggul + m.kelonggaran + m.susun_tepi * m.bil_susun) / 2}" y="${y0 + m.labuh_kain / 2}">Kain</text>`;
@@ -923,7 +921,6 @@ class SvgBuilder {
         m.susun_tepi * m.bil_susun +
         m.basi_sambungan * 2
     ) {
-      //layout 3
       kain += `<rect class="piece" x="${x0 + 2}" y="${y4}" width="${m.pinggul + m.kelonggaran + m.susun_tepi * m.bil_susun + m.basi_sambungan * 2}" height="${m.labuh_kain + m.basi_sambungan * 2}" /> 
               <rect class="sew-line" x="${x0 + 2 + m.basi_sambungan}" y="${y4 + m.basi_sambungan}" width="${m.pinggul + m.kelonggaran + m.susun_tepi * m.bil_susun}" height="${m.labuh_kain}" />
               <text class="label" transform="rotate(270, ${x0 + (m.pinggul + m.kelonggaran + m.susun_tepi * m.bil_susun) / 2}, ${y4 + m.labuh_kain / 2})" x="${x0 + (m.pinggul + m.kelonggaran + m.susun_tepi * m.bil_susun) / 2}" y="${y4 + m.labuh_kain / 2}">Kain</text>`;
@@ -2280,7 +2277,7 @@ class SvgBuilder {
 
     switch (l) {
       case "teluk":
-        leher = this._getLeherTeluk(m, x0, y0);
+        leher = this._getLeherTeluk(m, x0 + 10, y0 + 5);
         break;
       case "cekak":
         leher = this._getLeherCekak(m, x0, y0 + 3);
@@ -2566,12 +2563,13 @@ class SvgBuilder {
     const tinggiKolar = m.leher > 37 ? 3.175 : 2.54;
     const lebarTulangAtas = m.leher > 37 ? 3.175 : 2.54;
     const tinggiTulangBawah = m.m_belahan_leher + 1.27;
+    const kolarAdjust = m.leher > 36 ? 0.635 : 0;
 
-    const x1 = x + m.leher / 2 + selisihButang;
-    const x2 = x1 + (m.leher / 2 + selisihButang) / 2;
-    const x3 = x1 + m.leher / 2 + selisihButang;
-    const x10 = x1 - (m.leher / 2 + selisihButang) / 2;
-    const x11 = x1 - m.leher / 2 - selisihButang;
+    const x1 = x + m.leher / 2 + selisihButang - kolarAdjust;
+    const x2 = x1 + (m.leher / 2 + selisihButang - kolarAdjust) / 2;
+    const x3 = x1 + m.leher / 2 + selisihButang - kolarAdjust;
+    const x10 = x1 - (m.leher / 2 + selisihButang - kolarAdjust) / 2;
+    const x11 = x1 - m.leher / 2 - selisihButang - kolarAdjust;
 
     const y1 = y + tinggiKolar - 1.91;
     const y2 = y + tinggiKolar;
@@ -2651,12 +2649,13 @@ class SvgBuilder {
     const tinggiKolar = m.leher > 37 ? 3.175 : 2.54;
     const lebarTulangAtas = m.leher > 37 ? 3.175 : 2.54;
     const tinggiTulangBawah = m.m_belahan_leher + 1.27;
+    const kolarAdjust = m.leher > 36 ? 0.635 : 0;
 
-    const x1 = x + m.leher / 2;
-    const x2 = x1 + m.leher / 2 / 2;
-    const x3 = x1 + m.leher / 2;
-    const x10 = x1 - m.leher / 2 / 2;
-    const x11 = x1 - m.leher / 2;
+    const x1 = x + m.leher / 2 - kolarAdjust;
+    const x2 = x1 + (m.leher / 2 - kolarAdjust) / 2;
+    const x3 = x1 + m.leher / 2 - kolarAdjust;
+    const x10 = x1 - (m.leher / 2 - kolarAdjust) / 2;
+    const x11 = x1 - m.leher / 2 - kolarAdjust;
 
     const y1 = y + tinggiKolar - 1.91;
     const y2 = y + tinggiKolar;

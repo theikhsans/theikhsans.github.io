@@ -71,48 +71,29 @@ class UI {
       "bukaan_kaki",
     ];
 
-    // Cache DOM elements (use fallbacks to match existing HTML structure)
     this.elements = {
-      // Top nav (buttons may be static elements with data-view)
-      // sewingPatternBtn:
-      //   document.getElementById("sewingPatternBtn") ||
-      //   document.querySelector('.view-btn[data-view="sewingPattern"]'),
-      // cuttingLayoutBtn:
-      //   document.getElementById("cuttingLayoutBtn") ||
-      //   document.querySelector('.view-btn[data-view="cuttingLayout"]'),
       viewToggle:
         document.getElementById("viewToggle") ||
         document.querySelector(".view-toggle"),
       unitToggle:
         document.getElementById("unitToggle") ||
         document.querySelector(".unit-toggle"),
-      //unitLabel: document.getElementById("unitLabel") || null,
       widthToggle:
         document.getElementById("widthToggle") ||
         document.querySelector(".width-toggle"),
       leherRadio:
         document.getElementById("leherRadio") ||
         document.querySelector(".leher-radio"),
-
-      // Garment & Size (either selects or button groups)
       garmentSelect: document.getElementById("garmentSelect") || null,
       sizeSelect: document.getElementById("sizeSelect") || null,
       garmentButtons: document.querySelectorAll(".garment-btn"),
       sizeButtons: document.querySelectorAll(".size-btn"),
-
-      //Leher Type radio buttons
       leherButtons: document.getElementsByName("jenis_leher") || null,
-
-      // Measurements (support both singular/plural id)
       measurementContainer:
         document.getElementById("measurementContainer") ||
         document.getElementById("measurementsContainer"),
-
-      // Canvas
       canvas: document.getElementById("canvas") || null,
       svgContainer: document.getElementById("svgContainer"),
-
-      // Info
       errorMessage: document.getElementById("errorMessage") || null,
     };
 
@@ -127,19 +108,6 @@ class UI {
    * Attach all event listeners
    */
   _attachEventListeners() {
-    // View buttons (support buttons with data-view)
-    // if (this.elements.sewingPatternBtn) {
-    //   this.elements.sewingPatternBtn.addEventListener("click", () =>
-    //     this.state.setView("sewingPattern")
-    //   );
-    // }
-    // if (this.elements.cuttingLayoutBtn) {
-    //   this.elements.cuttingLayoutBtn.addEventListener("click", () =>
-    //     this.state.setView("cuttingLayout")
-    //   );
-    // }
-
-    // View toggle (support .view-toggle container with .toggle-btn children)
     if (this.elements.viewToggle) {
       this.elements.viewToggle.addEventListener("click", (e) => {
         const btn = e.target.closest && e.target.closest(".toggle-btn");

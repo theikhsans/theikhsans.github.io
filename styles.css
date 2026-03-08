@@ -48,7 +48,6 @@ html {
 ::before,
 ::after {
   box-sizing: border-box;
-  undefined: undefined;
   border-width: 0;
   border-style: solid;
   border-color: #e5e7eb;
@@ -56,7 +55,6 @@ html {
 html,
 :host {
   line-height: 1.5;
-  undefined: undefined;
   -webkit-text-size-adjust: 100%;
   -moz-tab-size: 4;
   tab-size: 4;
@@ -69,12 +67,10 @@ html,
 }
 body {
   margin: 0;
-  undefined: undefined;
   line-height: inherit;
 }
 hr {
   height: 0;
-  undefined: undefined;
   color: inherit;
   border-top-width: 1px;
 }
@@ -105,7 +101,6 @@ pre {
   font-family:
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;
-  undefined: undefined;
   font-feature-settings: normal;
   font-variation-settings: normal;
   font-size: 1em;
@@ -128,7 +123,6 @@ sup {
 }
 table {
   text-indent: 0;
-  undefined: undefined;
   border-color: inherit;
   border-collapse: collapse;
 }
@@ -138,7 +132,6 @@ optgroup,
 select,
 textarea {
   font-family: inherit;
-  undefined: undefined;
   font-feature-settings: inherit;
   font-variation-settings: inherit;
   font-size: 100%;
@@ -158,7 +151,6 @@ input:where([type="button"]),
 input:where([type="reset"]),
 input:where([type="submit"]) {
   -webkit-appearance: button;
-  undefined: undefined;
   background-color: transparent;
   background-image: none;
 }
@@ -177,7 +169,6 @@ progress {
 }
 [type="search"] {
   -webkit-appearance: textfield;
-  undefined: undefined;
   outline-offset: -2px;
 }
 ::-webkit-search-decoration {
@@ -185,7 +176,6 @@ progress {
 }
 ::-webkit-file-upload-button {
   -webkit-appearance: button;
-  undefined: undefined;
   font: inherit;
 }
 summary {
@@ -229,7 +219,6 @@ textarea {
 input::placeholder,
 textarea::placeholder {
   opacity: 1;
-  undefined: undefined;
   color: #9ca3af;
 }
 button,
@@ -248,7 +237,6 @@ iframe,
 embed,
 object {
   display: block;
-  undefined: undefined;
   vertical-align: middle;
 }
 img,
@@ -334,7 +322,6 @@ video {
   grid-template-columns: 520px 1fr;
   grid-template-rows: auto auto 1fr;
   gap: 2rem;
-  undefined: undefined;
   align-items: start;
   min-height: 900px;
 }
@@ -1493,6 +1480,16 @@ video {
 .toggle-btn:hover {
   background-color: #f3f4f6;
 }
+
+/* Radio Button Styling */
+input[type="radio"] {
+  accent-color: var(--gjs-t-color-primary);
+}
+
+input[type="radio"]:checked {
+  accent-color: var(--gjs-t-color-primary);
+}
+
 .pss-inputwrap {
   transition:
     border-color 150ms ease,
